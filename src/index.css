@@ -1,0 +1,142 @@
+/* पूरे पेज का बैकग्राउंड और फॉन्ट सेट किया गया है */
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: #f0f2f5; 
+    padding: 20px; 
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* डैशबोर्ड के मुख्य कार्ड का स्टाइल */
+.dashboard-card { 
+    background: white; 
+    padding: 20px; 
+    border-radius: 16px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08); 
+    max-width: 1100px; 
+    margin: auto; 
+    box-sizing: border-box;
+}
+
+/* हेडिंग का रंग */
+h2 { color: #1a237e; text-align: center; margin-bottom: 25px; font-size: 24px; }
+
+/* 📱 टेबल के लिए स्पेशल हॉरिजॉन्टल स्लाइडर (Scrollable Container) */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    margin-top: 15px;
+}
+
+/* टेबल स्टाइलिंग */
+table { width: 100%; min-width: 800px; border-collapse: separate; border-spacing: 0; }
+th { background-color: #303f9f; color: white; padding: 14px 10px; font-size: 13px; white-space: nowrap; }
+td { padding: 12px 10px; text-align: center; border-bottom: 1px solid #e0e0e0; white-space: nowrap; }
+
+/* 🔒 फिक्स्ड कॉलम (साल वाला - बाएँ साइड) */
+.year-cell { 
+    font-weight: bold; 
+    position: sticky; 
+    left: 0; 
+    z-index: 2; 
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05); 
+}
+th.year-cell {
+    background-color: #303f9f !important;
+    color: white !important;
+}
+td.year-cell {
+    background-color: #f9f9f9 !important;
+    color: #1a237e !important;
+}
+
+/* 🔒 फिक्स्ड कॉलम (टोटल वाला - दाएँ साइड) - 🌟 नया बदलाव */
+.total-cell {
+    font-weight: bold;
+    position: sticky;
+    right: 0;
+    z-index: 2;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.05);
+}
+th.total-cell {
+    background-color: #303f9f !important;
+    color: white !important;
+}
+td.total-cell {
+    background-color: #f9f9f9 !important; /* साल वाले सेल जैसा हल्का ग्रे बैकग्राउंड */
+    color: #1a237e !important;          /* वैल्यू का कलर ब्लू */
+}
+
+/* पॉप-अप (Modal) स्टाइल */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1000; justify-content: center; align-items: center; padding: 10px; box-sizing: border-box; }
+
+/* इनपुट और सिलेक्ट बॉक्स */
+select, input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; font-size: 16px; }
+
+/* बटन्स स्टाइल */
+.btn-save { width: 100%; background: #00d2ff; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 10px; font-size: 16px; }
+.btn-save:disabled { background-color: #ccc !important; cursor: not-allowed; }
+
+/* बटन्स का मुख्य डिब्बा */
+.btn-container { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    flex-wrap: wrap; 
+    gap: 10px; 
+    margin-bottom: 20px; 
+}
+
+/* दाएँ साइड के बटन्स */
+.right-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* बटन की स्टाइल */
+.btn-Style { 
+    background: #303f9f; 
+    color: white; 
+    padding: 10px 18px; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    font-size: 14px; 
+    width: auto;              
+    display: inline-block;
+}
+
+/* पॉप-अप कंटेंट बॉक्स */
+.modal-content { background: white; padding: 0; border-radius: 12px; width: 100%; max-width: 400px; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.2); box-sizing: border-box; }
+
+/* ड्रैग करने वाला हेडर */
+.modal-header { padding: 15px; background: #f4f4f4; cursor: move; border-radius: 12px 12px 0 0; text-align: center; font-weight: bold; color: #1a237e; border-bottom: 1px solid #ddd; user-select: none; }
+.modal-body { padding: 20px; box-sizing: border-box; }
+
+/* 🎯 ग्राफ पॉप-अप के लिए विशेष रिस्पॉन्सिव CSS */
+.chart-modal-content { width: 100%; max-width: 800px; background: white; border-radius: 12px; box-sizing: border-box; }
+.chart-container { position: relative; width: 100%; height: 300px; }
+
+/* 📱 खास मोबाइल स्क्रीन्स के लिए अतिरिक्त नियम (Media Query) */
+@media (max-width: 600px) {
+    body { padding: 10px; }
+    .dashboard-card { padding: 15px; }
+    h2 { font-size: 20px; }
+    .btn-container {
+        flex-direction: column; 
+        align-items: stretch;
+    }
+    .right-buttons {
+        flex-direction: column; 
+        gap: 10px;
+    }
+    .btn-Style { 
+        width: 100%; 
+        flex: none; 
+    }
+    .chart-container { height: 250px; }
+}
