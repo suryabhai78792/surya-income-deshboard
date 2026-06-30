@@ -23,16 +23,23 @@ function App() {
   const GET_DATA_URL = 'https://my-income-backend.onrender.com/getdata'
   const SAVE_DATA_URL = 'https://my-income-backend.onrender.com/save'
 
+  const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
+
   // 1. सर्वर से टेबल और ग्राफ़ का डेटा लाना
     const loadDashboardData = () => {
+      setIsLoading(true); // फेच शुरू होने पर लोडिंग ऑन करें
         fetch(GET_DATA_URL)
           .then(res => res.json())
-          .then(data => {
+          .then(data => {           
             setTableData(data);
             latestDataRef.current = data; // 🔥 स्टेट के साथ-साथ रीफ़ में भी लेटेस्ट डेटा रख लें
             renderSnakeChart(data); // पहली बार में ग्राफ़ रेंडर करें
+            setIsLoading(false); // डेटा आते ही लोडिंग बंद करें  
           })
-          .catch(err => console.error("लोड एरर:", err))
+          .catch(err => {
+            console.error("लोड एरर:", err)
+            setIsLoading(false); // डेटा आते ही लोडिंग बंद करें
+          } )
       }
 
     // 2. कंपोनेंट लोड होने पर डेटा लाना और 12 सेकेंड का ग्राफ़ लूप शुरू करना
@@ -115,6 +122,7 @@ function App() {
           ctx.shadowBlur = 18; 
         });
       },
+
       afterDatasetsDraw(chart) {
         const { ctx } = chart;
         chart.data.datasets.forEach((dataset, datasetIndex) => {
@@ -128,6 +136,7 @@ function App() {
               }
             }
           }
+          
           if (lastVisiblePoint) {
             const x = lastVisiblePoint.x;
             const y = lastVisiblePoint.y;
@@ -209,7 +218,7 @@ function App() {
             max: monthsLabels.length - 1,
             // मोबाइल पर 'महीने' का टाइटल छुपाने के लिए
             title: { 
-              display: window.innerWidth > 600, 
+              display: window.innerWidth > 1024, 
               text: 'महीने (Months)' 
             },
             ticks: {
@@ -221,7 +230,7 @@ function App() {
             beginAtZero: true,
             // मोबाइल पर 'कुल कमाई' का टाइटल छुपाने के लिए
             title: { 
-              display: window.innerWidth > 600, 
+              display: window.innerWidth > 1024, 
               text: 'कुल कमाई (₹ में)' 
             },
             ticks: { callback: value => '₹' + value.toLocaleString('en-IN') }
@@ -304,7 +313,14 @@ function App() {
             height: window.innerWidth < 600 ? "200px" : "300px", 
             position: "relative" 
             }}>
-            <canvas ref={chartCanvasRef} id="incomeChart"></canvas>
+            {/* लोडिंग व्हील ओवरले */}
+            {isLoading && (
+              <div className="loading-overlay">
+                <div className="spinner"></div>
+                <p>सर्वर जाग रहा है, कृपया प्रतीक्षा करें... ⏳</p>
+              </div>
+              )}
+            <canvas ref={chartCanvasRef} id="incomeChart"></canvas>            
           </div>
         </div>
         
