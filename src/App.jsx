@@ -181,6 +181,12 @@ function App() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        // मोबाइल के लिए लाइन की मोटाई (borderWidth) डायनामिक रखने के लिए
+        elements: {
+          line: {
+            borderWidth: window.innerWidth < 600 ? 2 : 4 // मोबाइल पर 2, डेस्कटॉप पर 4
+          }
+        },
         animation: {
           x: {
             type: 'number',
@@ -201,7 +207,11 @@ function App() {
             type: 'linear',
             min: 0,
             max: monthsLabels.length - 1,
-            title: { display: true, text: 'महीने (Months)' },
+            // मोबाइल पर 'महीने' का टाइटल छुपाने के लिए
+            title: { 
+              display: window.innerWidth > 600, 
+              text: 'महीने (Months)' 
+            },
             ticks: {
               stepSize: 1,
               callback: value => monthsLabels[value]
@@ -209,7 +219,11 @@ function App() {
           },
           y: {
             beginAtZero: true,
-            title: { display: true, text: 'कुल कमाई (₹ में)' },
+            // मोबाइल पर 'कुल कमाई' का टाइटल छुपाने के लिए
+            title: { 
+              display: window.innerWidth > 600, 
+              text: 'कुल कमाई (₹ में)' 
+            },
             ticks: { callback: value => '₹' + value.toLocaleString('en-IN') }
           }
         }

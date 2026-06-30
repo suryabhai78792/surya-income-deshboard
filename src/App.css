@@ -135,6 +135,12 @@
       width: 18px;
     }
   }
+  /* App.css में जोड़ें */
+  @media (max-width: 600px) {
+    .chart-container {
+      height: 200px !important; /* मोबाइल पर थोड़ी ऊँचाई कम कर दी */
+    }
+  }
 
   @media (max-width: 1024px) {
     margin-top: 20px;
