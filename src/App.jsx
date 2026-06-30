@@ -184,7 +184,7 @@ function App() {
         // मोबाइल के लिए लाइन की मोटाई (borderWidth) डायनामिक रखने के लिए
         elements: {
           line: {
-            borderWidth: window.innerWidth < 600 ? 2 : 4 // मोबाइल पर 2, डेस्कटॉप पर 4
+            borderWidth: window.innerWidth < 600 ? 1 : 4 // मोबाइल पर 2, डेस्कटॉप पर 4
           }
         },
         animation: {

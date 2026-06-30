@@ -138,7 +138,7 @@
   /* App.css में जोड़ें */
   @media (max-width: 600px) {
     .chart-container {
-      height: 200px !important; /* मोबाइल पर थोड़ी ऊँचाई कम कर दी */
+      height: 100px !important; /* मोबाइल पर थोड़ी ऊँचाई कम कर दी */
     }
   }
 
