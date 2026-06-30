@@ -163,7 +163,7 @@ function App() {
             data: smoothLastYear,
             borderColor: '#95a5a6', 
             backgroundColor: 'transparent',
-            borderWidth: 4,
+            borderWidth: window.innerWidth < 600 ? 2 : 4,
             pointRadius: 0,
             showLine: true
           },
@@ -172,7 +172,7 @@ function App() {
             data: smoothCurrentYear,
             borderColor: '#00d2ff', 
             backgroundColor: 'transparent',
-            borderWidth: 5,
+            borderWidth: window.innerWidth < 600 ? 2 : 5,
             pointRadius: 0,
             showLine: true
           }
@@ -181,12 +181,6 @@ function App() {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        // मोबाइल के लिए लाइन की मोटाई (borderWidth) डायनामिक रखने के लिए
-        elements: {
-          line: {
-            borderWidth: window.innerWidth < 600 ? 1 : 4 // मोबाइल पर 2, डेस्कटॉप पर 4
-          }
-        },
         animation: {
           x: {
             type: 'number',
@@ -300,7 +294,10 @@ function App() {
 
         <div className="main-chart-wrapper" style={{ background: "#ffffff", padding: "15px", borderRadius: "12px", marginBottom: "20px", boxShadow: "inset 0 0 5px rgba(0,0,0,0.05)" }}>
           <h3 style={{ color: "#1a237e", marginTop: "0", marginBottom: "15px", fontSize: "16px", textAlign: "left" }}>वार्षिक इनकम प्रोग्रेस ग्राफ़ (प्रत्येक 5s में रीस्टार्ट) 📈</h3>
-          <div className="chart-container" style={{ height: "300px", position: "relative" }}>
+          <div className="chart-container" style={{ 
+            height: window.innerWidth < 600 ? "200px" : "300px", 
+            position: "relative" 
+            }}>
             <canvas ref={chartCanvasRef} id="incomeChart"></canvas>
           </div>
         </div>
