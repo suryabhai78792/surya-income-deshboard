@@ -20,8 +20,8 @@ function App() {
   const modalContainerRef = useRef(null)
 
   // API URLs
-  const GET_DATA_URL = 'https://surya-income-deshboard.onrender.com/getdata'
-  const SAVE_DATA_URL = 'https://surya-income-deshboard.onrender.com/save'
+  const GET_DATA_URL = 'https://my-income-backend.onrender.com/getdata'
+  const SAVE_DATA_URL = 'https://my-income-backend.onrender.com/save'
 
   // 1. सर्वर से टेबल और ग्राफ़ का डेटा लाना
     const loadDashboardData = () => {
