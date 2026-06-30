@@ -163,7 +163,7 @@ function App() {
             data: smoothLastYear,
             borderColor: '#95a5a6', 
             backgroundColor: 'transparent',
-            borderWidth: window.innerWidth < 600 ? 2 : 4,
+            borderWidth: window.innerWidth < 600 ? 1 : 2,
             pointRadius: 0,
             showLine: true
           },
@@ -172,7 +172,7 @@ function App() {
             data: smoothCurrentYear,
             borderColor: '#00d2ff', 
             backgroundColor: 'transparent',
-            borderWidth: window.innerWidth < 600 ? 2 : 5,
+            borderWidth: window.innerWidth < 600 ? 1 : 2,
             pointRadius: 0,
             showLine: true
           }
