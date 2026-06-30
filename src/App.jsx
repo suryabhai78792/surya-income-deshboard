@@ -152,10 +152,16 @@ function App() {
 
     const ctx = chartCanvasRef.current.getContext('2d');
     const monthsLabels = ['0', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
+    const getBorderWidth = () => {
+    const width = window.innerWidth;
+      if (width < 600) return 1;          // 600 से कम (पोर्ट्रेट मोबाइल)
+      if (width < 1024) return 2;         // 600 से 1024 के बीच (लैंडस्केप)
+      return 4;                           // 1024 से ऊपर (कंप्यूटर)
+      };
     activeChartRef.current = new Chart(ctx, {
       type: 'line',
       plugins: [glowingEffectPlugin],
+      
       data: {
         datasets: [
           {
@@ -163,7 +169,7 @@ function App() {
             data: smoothLastYear,
             borderColor: '#95a5a6', 
             backgroundColor: 'transparent',
-            borderWidth: window.innerWidth < 600 ? 1 : 2,
+            borderWidth: getBorderWidth(),
             pointRadius: 0,
             showLine: true
           },
@@ -172,7 +178,7 @@ function App() {
             data: smoothCurrentYear,
             borderColor: '#00d2ff', 
             backgroundColor: 'transparent',
-            borderWidth: window.innerWidth < 600 ? 1 : 2,
+            borderWidth: getBorderWidth(),
             pointRadius: 0,
             showLine: true
           }
