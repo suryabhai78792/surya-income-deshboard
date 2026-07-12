@@ -1,0 +1,31 @@
+/* components/MyButton.css */
+
+/* ===================================================
+   MyButton.css - बटन का सामान्य स्टाइल (कंप्यूटर/बड़ी स्क्रीन के लिए)
+   =================================================== */
+
+.btn-Style {
+  background: #303f9f; 
+  color: white; 
+  padding: 10px 20px;
+  border: none; 
+  border-radius: 8px;
+  font-weight: bold; 
+  font-size: 14px;
+  width: auto;              
+  display: inline-block;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+}
+
+/* ===================================================
+   मोबाइल स्क्रीन्स के लिए विशेष नियम (सिर्फ बटन के लिए)
+   =================================================== */
+
+@media (max-width: 600px) {
+  .btn-Style {
+    width: 100%;
+    flex: none;
+  }
+}
