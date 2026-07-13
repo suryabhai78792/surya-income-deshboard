@@ -8,6 +8,8 @@ import './App.css'
 import { convertDataByMode } from './components/dataConverter';
 import MyButton from './components/MyButton';
 import ReusableTable from './components/ReusableTable';
+import DashboardView from './pages/DashboardView';
+import TransactionsView from './pages/TransactionsView';
 
 const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Total'];
               // ---
@@ -36,7 +38,7 @@ const COLORS = ['#F59E0B', '#10B981', '#3B82F6', '#EF4444'];
   const [selectedMonth, setSelectedMonth] = useState('Jan')
   const [incomeInput, setIncomeInput] = useState('')
    const [isSaveDisabled, setIsSaveDisabled] = useState(true);
-
+const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' या 'transactions'
   
   const [viewMode, setViewMode] = useState('yearly'); // 'daily', 'yearly', 'final'
   const [dateInput, setDateInput] = useState(''); // YYYY-MM-DD फॉर्मेट के लिए
@@ -47,6 +49,7 @@ const COLORS = ['#F59E0B', '#10B981', '#3B82F6', '#EF4444'];
   const activeChartInstance = useRef(null);
   const chartLoopInterval = useRef(null);
   const modalContainerRef = useRef(null)
+  const modalRef = useRef(null);
 
   // API URLs
   const GET_DATA_URL = 'https://my-income-backend.onrender.com/getdata'
@@ -124,6 +127,7 @@ const COLORS = ['#F59E0B', '#10B981', '#3B82F6', '#EF4444'];
       startChartAutoLoop(); // बटन दबाते ही तुरंत नया लूप शुरू और ग्राफ़ रीफ्रेश!
     }
   }, [viewMode]); // 👈 इसका मतलब है: जब भी viewMode बदले, यह कोड तुरंत चलाओ
+
 
         // Chart Loop Logic
   const startChartAutoLoop = () => {
@@ -391,7 +395,7 @@ const { tableData: convertedTableData } = convertDataByMode(databaseData, viewMo
   // 6. ड्रैगेबल मोडल हेडर फंक्शनलिटी (रिएक्ट वे)
   const handleMouseDown = (e) => {
     if (window.innerWidth < 600) return; 
-    const container = modalContainerRef.current;
+    const container = modalRef.current;
     if (!container) return;
 
     let offsetX = e.clientX - container.offsetLeft;
@@ -412,43 +416,57 @@ const { tableData: convertedTableData } = convertDataByMode(databaseData, viewMo
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
   };
-            // ---
+
+
 
 
   return (
     // 'bg-gray-100' से बैकग्राउंड ग्रे होगा और 'p-8' से पैडिंग आएगी
-    <div className="bg-gray-100 min-h-screen">
+  <div className="bg-gray-100 min-h-screen">
       {/* यहाँ अपने चार्ट और कार्ड्स को क्लास दें */}
 
       {/* 1. साइडबार भाग */}
       <div className="bg-white shadow-md p-6 border-b border-gray-300">
          <h1 className="text-2xl font-bold text-blue-600 ">Finance Tracker </h1>
       </div>
-      <div className="flex h-screen bg-gray-50">      
+    <div className="flex h-screen bg-gray-50">      
       {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-300 p-6">
+      <div className="w-64 bg-white border-r border-gray-300 p-6 flex-shrink-0">
         
-        <button className="w-full bg-blue-600 text-white rounded-lg py-2 mb-6 flex items-center justify-center gap-2" onClick={() => setIsModalOpen(true)}>
+        <button className="w-full bg-blue-600 text-white rounded-lg py-2 mb-6 flex items-center justify-center gap-2" onClick={() => setShowModal(true)}>
           <Plus size={20} /> Add Transaction 
         </button>
         
 
         <nav className="space-y-4">
-          <div className="flex items-center gap-3 text-blue-600 font-semibold"><LayoutDashboard size={20}/> Dashboard</div>
-          <div className="flex items-center gap-3 text-gray-600"><Receipt size={20}/> Transactions</div>
+
+          <div     
+            className={`cursor-pointer flex items-center gap-3 ${activeTab === 'dashboard' ? 'text-blue-600 font-bold' : 'text-gray-600'}`} 
+            onClick={() => setActiveTab('dashboard')}
+          >
+            <LayoutDashboard size={20}/> Dashboard
+          </div>
+
+           <div     
+            className={`cursor-pointer flex items-center gap-3 ${activeTab === 'transactions' ? 'text-blue-600 font-bold' : 'text-gray-600'}`} 
+            onClick={() => setActiveTab('transactions')}
+          >
+            <Receipt size={20}/> Transactions
+          </div>
+
           <div className="flex items-center gap-3 text-gray-600"><BarChart3 size={20}/> Reports</div>
           <div className="flex items-center gap-3 text-gray-600"><Settings size={20}/> Settings</div>
 
-          <div className="flex items-center gap-3 text-gray-600 cursor: pointer" onClick={() => setViewMode('daily')}             style={{ 
+          <div className="flex items-center gap-3 text-gray-600 cursor-pointer whitespace-nowrap" onClick={() => setViewMode('daily')}             style={{ 
               fontWeight: viewMode === 'daily' ? 'bold' : 'normal',
               color: viewMode === 'daily' ? 'blue' : 'gray' 
             }} >📅महीना व्यू (तारीख वार) </div>
-          <div className="flex items-center gap-3 text-gray-600 cursor: pointer" onClick={() => setViewMode('yearly')}             style={{ 
+          <div className="flex items-center gap-3 text-gray-600 cursor-pointer" onClick={() => setViewMode('yearly')}             style={{ 
               fontWeight: viewMode === 'yearly' ? 'bold' : 'normal',
               color: viewMode === 'yearly' ? 'blue' : 'gray' 
             }}>📈साल व्यू (महीने वार) </div>
 
-          <div className="flex items-center gap-3 text-gray-600 cursor: pointer" onClick={() => setViewMode('final')}             style={{ 
+          <div className="flex items-center gap-3 text-gray-600 cursor-pointer" onClick={() => setViewMode('final')}             style={{ 
               fontWeight: viewMode === 'final' ? 'bold' : 'normal',
               color: viewMode === 'final' ? 'blue' : 'gray' 
             }}>💰फाइनल इनकम व्यू </div>
@@ -467,25 +485,33 @@ const { tableData: convertedTableData } = convertDataByMode(databaseData, viewMo
         {/* Stats Cards */}
 
         {/* 3. इनकम और एक्सपेंस बॉक्स */}
-        <div className="grid grid-cols-4 gap-4 mb-8">
-          <div className="bg-white p-4 rounded-xl border border-green-300">
+        <div className="grid grid-cols-4 gap-4 ">
+          <div className="bg-green-50 p-4 rounded-xl border border-green-300">
             <p className="text-sm text-gray-500">Total Income</p>
             <h2 className="text-2xl font-bold">₹2,84,345</h2>
           </div>
-          <div className="bg-white p-4 rounded-xl border border-red-300">
+          <div className="bg-red-50 p-4 rounded-xl border border-red-300">
             <p className="text-sm text-gray-500">Total Expense</p>
             <h2 className="text-2xl font-bold text-red-500">₹1,89,234</h2>
           </div>
-          <div className="bg-white p-4 rounded-xl border border-blue-300">
+          <div className="bg-blue-50 p-4 rounded-xl border border-blue-300">
             <p className="text-sm text-gray-500">Savings</p>
             <h2 className="text-2xl font-bold text-red-500">₹95111</h2>
           </div>
-          <div className="bg-white p-4 rounded-xl border border-yellow-300">
+          <div className="bg-gray-200 p-4 rounded-xl border border-yellow-300">
             <p className="text-sm text-gray-500">Budget Balance</p>
             <h2 className="text-2xl font-bold text-red-500">₹20000</h2>
           </div>
           {/* ... अन्य कार्ड्स इसी तरह जोड़ें ... */}
         </div>
+        
+
+<main className="flex-1 p-6">
+  {activeTab === 'dashboard' && <DashboardView data={databaseData} />}
+  {activeTab === 'transactions' && <TransactionsView data={databaseData} />}
+</main>
+
+      <div className=" h-[700px] overflow-y-auto">
 
         {/* Charts Section */}
         {/* 4. चार्ट्स का भाग */}
@@ -511,7 +537,7 @@ const { tableData: convertedTableData } = convertDataByMode(databaseData, viewMo
 
             {/* यहाँ आप Recharts का LineChart डाल सकते हैं */}
           </div>
-  {/* पाई चार्ट भाग */}
+             {/* पाई चार्ट भाग */}
           <div className="bg-white p-6 rounded-xl border border-gray-300">
             <h3 className="font-bold mb-4">Category-wise Expense</h3>
             <ResponsiveContainer width="100%" height={200}>
@@ -532,10 +558,14 @@ const { tableData: convertedTableData } = convertDataByMode(databaseData, viewMo
         </div>
 
 
+
+
+      </div>
+
       </div>
 
 
-  {/* Entry Modal */}
+      {/* Entry Modal */}
       {showModal && (
         <div id="entryModal" className="modal" style={{ display: 'flex' }}>
           <div className="modal-content" id="modalContainer" ref={modalRef}>
