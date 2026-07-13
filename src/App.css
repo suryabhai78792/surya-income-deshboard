@@ -1,3 +1,10 @@
+/* App.css */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
 .loading-overlay {
   position: absolute;
   top: 0;
