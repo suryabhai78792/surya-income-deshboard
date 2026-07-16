@@ -127,22 +127,23 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
     document.addEventListener('mouseup', mouseUpHandler);
   };
 
+return (
+    // पूरे पेज को एक फिक्स्ड हाइट दें ताकि बाहर वाला स्क्रोल बार न आए
+    <div className="h-screen flex flex-col bg-gray-100 overflow-hidden">
+      
+      {/* 1. हेडर (फिक्स्ड रहेगा) */}
+      <header className="bg-white shadow-md p-6 border-b border-gray-300 flex-shrink-0">
+         <h1 className="text-2xl font-bold text-blue-600">Finance Tracker</h1>
+      </header>
 
-
-
-  return (
-    // 'bg-gray-100' से बैकग्राउंड ग्रे होगा और 'p-8' से पैडिंग आएगी
-  <div className="bg-gray-100 min-h-screen">
-      {/* यहाँ अपने चार्ट और कार्ड्स को क्लास दें */}
-
-      {/* 1. साइडबार भाग */}
-      <div className="bg-white shadow-md p-6 border-b border-gray-300">
-         <h1 className="text-2xl font-bold text-blue-600 ">Finance Tracker </h1>
-      </div>
-    <div className="flex min-h-screen bg-gray-50">      
-      {/* Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-300 p-6 flex-shrink-0 h-full">
+      {/* 2. मुख्य कंटेनर (साइडबार + कंटेंट) */}
+      <div className="flex flex-1 overflow-hidden">
         
+        {/* साइडबार */}
+        <div className="w-64 bg-white border-r border-gray-300 p-6 flex-shrink-0 overflow-y-auto">
+           {/* ... आपका साइडबार कोड यहाँ रहेगा ... */}
+
+
         <button className="w-full bg-blue-600 text-white rounded-lg py-2 mb-6 flex items-center justify-center gap-2" onClick={() => setShowModal(true)}>
           <Plus size={20} /> Add Transaction 
         </button>
@@ -200,13 +201,15 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
           डेटा बैकअप (JSON)
         </button>
 
-      </div>
 
 
-      {/* 2. मुख्य कंटेंट क्षेत्र */}
-      <div className="flex-1 p-8">
-        {/* Stats Cards */}
 
+        </div>
+
+        {/* मुख्य कंटेंट क्षेत्र (सिर्फ यही स्क्रोल होगा) */}
+        <main className="flex-1 overflow-y-auto p-8">
+           {/* यहाँ आपके कार्ड्स और DashboardView रहेगा */}
+           {/* ... */}
         {/* 3. इनकम और एक्सपेंस बॉक्स */}
         <div className="grid grid-cols-4 gap-4 ">
           <div className="bg-green-50 p-4 rounded-xl border border-green-300">
@@ -235,7 +238,7 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
 </main>
 
 
-      </div>
+        </main>
 
 
       {/* Entry Modal */}
@@ -291,12 +294,9 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
       )}
 
 
+      </div>
     </div>
-    </div>
-
-    
-
-
   );
+
 }
 export default App;
