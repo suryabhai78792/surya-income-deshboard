@@ -219,3 +219,19 @@ body {
   }
 }
 
+/* साइडबार के सब-मेनू के लिए */
+.submenu-container {
+  display: grid;
+  grid-template-rows: 0fr; /* शुरू में बंद */
+  transition: grid-template-rows 0.4s ease-in-out;
+}
+
+.submenu-container.open {
+  grid-template-rows: 1fr; /* धीरे-धीरे खुलेगा */
+}
+
+.submenu-content {
+  overflow: hidden;
+}
+
+

@@ -151,11 +151,38 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
         <nav className="space-y-4">
 
           <div     
-            className={`cursor-pointer flex items-center gap-3 ${activeTab === 'dashboard' ? 'text-blue-600 font-bold' : 'text-gray-600'}`} 
+            className={`cursor-pointer flex items-center mb-0 gap-3 ${activeTab === 'dashboard' ? 'text-blue-600 font-bold' : 'text-gray-600'}`} 
             onClick={() => setActiveTab('dashboard')}
           >
             <LayoutDashboard size={20}/> Dashboard
           </div>
+
+          {/* एनीमेशन वाला सब-मेनू */}
+          <div className={`submenu-container ${activeTab === 'dashboard' ? 'open' : ''}`}>
+            <div className="submenu-content">
+              <div className="pl-8 pt-2 space-y-2 text-sm text-gray-500">
+                
+                  <div className="flex items-center mt-2 gap-3 text-gray-600 cursor-pointer whitespace-nowrap" 
+                       onClick={() => setViewMode('daily')} style={{ 
+                       fontWeight: viewMode === 'daily' ? 'bold' : 'normal',
+                       color: viewMode === 'daily' ? 'blue' : 'gray' 
+                  }} >📅महीना व्यू (तारीख वार) </div>
+
+                  <div className="flex items-center gap-3 text-gray-600 cursor-pointer" 
+                        onClick={() => setViewMode('yearly')} style={{ 
+                        fontWeight: viewMode === 'yearly' ? 'bold' : 'normal',
+                        color: viewMode === 'yearly' ? 'blue' : 'gray' 
+                  }}>📈साल व्यू (महीने वार) </div>
+
+                  <div className="flex items-center gap-3 text-gray-600 cursor-pointer" 
+                       onClick={() => setViewMode('final')} style={{ 
+                       fontWeight: viewMode === 'final' ? 'bold' : 'normal',
+                       color: viewMode === 'final' ? 'blue' : 'gray' 
+                  }}>💰फाइनल इनकम व्यू </div>
+
+                </div>
+              </div>
+            </div>
 
            <div     
             className={`cursor-pointer flex items-center gap-3 ${activeTab === 'transactions' ? 'text-blue-600 font-bold' : 'text-gray-600'}`} 
@@ -166,22 +193,9 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
 
           <div className="flex items-center gap-3 text-gray-600"><BarChart3 size={20}/> Reports</div>
           <div className="flex items-center gap-3 text-gray-600"><Settings size={20}/> Settings</div>
-
-          <div className="flex items-center gap-3 text-gray-600 cursor-pointer whitespace-nowrap" onClick={() => setViewMode('daily')}             style={{ 
-              fontWeight: viewMode === 'daily' ? 'bold' : 'normal',
-              color: viewMode === 'daily' ? 'blue' : 'gray' 
-            }} >📅महीना व्यू (तारीख वार) </div>
-          <div className="flex items-center gap-3 text-gray-600 cursor-pointer" onClick={() => setViewMode('yearly')}             style={{ 
-              fontWeight: viewMode === 'yearly' ? 'bold' : 'normal',
-              color: viewMode === 'yearly' ? 'blue' : 'gray' 
-            }}>📈साल व्यू (महीने वार) </div>
-
-          <div className="flex items-center gap-3 text-gray-600 cursor-pointer" onClick={() => setViewMode('final')}             style={{ 
-              fontWeight: viewMode === 'final' ? 'bold' : 'normal',
-              color: viewMode === 'final' ? 'blue' : 'gray' 
-            }}>💰फाइनल इनकम व्यू </div>
-          
+      
         </nav>
+
         <button className="w-full bg-blue-600 text-white rounded-lg py-2 mt-6 flex items-center justify-center gap-2" onClick={handleDownloadBackup}>
           डेटा बैकअप (JSON)
         </button>
@@ -190,7 +204,6 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
 
 
       {/* 2. मुख्य कंटेंट क्षेत्र */}
-      {/* Main Content */}
       <div className="flex-1 p-8">
         {/* Stats Cards */}
 
