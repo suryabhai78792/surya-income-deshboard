@@ -129,7 +129,7 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
 
 return (
     // पूरे पेज को एक फिक्स्ड हाइट दें ताकि बाहर वाला स्क्रोल बार न आए
-    <div className="h-screen flex flex-col bg-gray-100 overflow-hidden">
+    <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
       
       {/* 1. हेडर (फिक्स्ड रहेगा) */}
       <header className="bg-white shadow-md p-6 border-b border-gray-300 flex-shrink-0">
