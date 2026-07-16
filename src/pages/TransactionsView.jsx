@@ -14,9 +14,10 @@ const processedData = React.useMemo(() => {
 
   return (
      
-    <div className="p-5 bg-white rounded-xl border border-gray-300">
-      <h2 className="text-xl font-bold mb-4">All Transactions ({processedData.length})</h2>
+    <div className="p-5 bg-white rounded-xl border border-gray-300 ">
+      <h2 className="text-xl font-bold mb-4">All Transactions ({processedData.length})</h2>    
       <p className="font-semibold text-gray-800"> Date Income </p>
+      <div className=" h-[500px] overflow-y-auto ">
         <ul className="space-y-2">
           {processedData.length > 0 ? (
             processedData.map((item, index) => (
@@ -45,6 +46,7 @@ const processedData = React.useMemo(() => {
             <p className="text-gray-500 italic">अभी कोई ट्रांजेक्शन उपलब्ध नहीं है।</p>
           )}
         </ul>
+      </div>
       </div>
     
   );

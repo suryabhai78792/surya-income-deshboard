@@ -74,7 +74,7 @@ export function convertDataByMode(rawData, viewMode, dataKey = 'income') {
   // भाग 2: चार्ट के लिए शुद्ध ऑब्जेक्ट तैयार करना
   // ========================================================
   const chartData = {
-    headers: [...subHeaders], 
+    headers: [ ...subHeaders], 
     processedData: { ...processedData }
   };
 
