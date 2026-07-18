@@ -272,8 +272,8 @@ const { tableData: convertedTableData } = convertDataByMode(data, viewMode, 'inc
 
   return (
    <div>
-      <h2 className=" font-bold p-0 m-0"  >Dashboard View</h2>   
-    <div className=" rounded-xl  m-0 p-0 h-[600px] overflow-y-auto" >
+      <h2 className=" font-bold p-0 m-0 w-full text-center"  >Dashboard View</h2>   
+    <div className=" rounded-xl  m-0 p-0 h-[630px] overflow-y-auto " >
       {/* यहाँ अपना चार्ट या डैशबोर्ड वाला कोड लिखें */}
         {/* Charts Section */}
         {/* 4. चार्ट्स का भाग */}

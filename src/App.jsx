@@ -140,7 +140,7 @@ return (
       
 
       {/* 1. हेडर (फिक्स्ड रहेगा) */}
-<header className="bg-white shadow-md p-6 border-b border-gray-300 flex-shrink-0 flex items-center justify-between">
+<header className="bg-white  p-6 border-b border-gray-300 flex-shrink-0 flex items-center justify-between">
   
   {/* बायां हिस्सा: टाइटल */}
   <h1 className="text-2xl font-bold text-blue-600">Finance Tracker</h1>
@@ -239,7 +239,7 @@ return (
   <StatsCard income={income} expense={expense} savings={savings} budget={budget} />
 
   {/* 2. दूसरा 'main' हटाकर सीधे DashboardView रखें */}
-  <div className="mt-0"> 
+  <div> 
     {activeTab === 'dashboard' && <DashboardView data={databaseData} viewMode={viewMode} />}
     {activeTab === 'transactions' && <TransactionsView data={databaseData} />}
     

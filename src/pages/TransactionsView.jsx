@@ -15,7 +15,7 @@ const processedData = React.useMemo(() => {
   return (
      
     <div className="p-5 bg-white rounded-xl border border-gray-300 mb-0">
-      <h2 className="text-xl font-bold mb-4">All Transactions ({processedData.length})</h2>    
+      <h2 className="text-xl font-bold mb-4 w-full text-center">All Transactions ({processedData.length})</h2>    
       <p className="font-semibold text-gray-800"> Date Income </p>
       <div className=" h-[530px] overflow-y-auto mb-0 ">
         <ul className="space-y-2">
