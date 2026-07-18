@@ -1,7 +1,11 @@
 import React from 'react';
 import './ReusableTable.css';
 
+
 export default function ReusableTable({ data}) {
+
+
+
    // सुरक्षा चेक: अगर डेटा नहीं आया है या खाली है, तो कुछ मत दिखाओ
   if (!data || data.length === 0) {
     return <p className="text-gray-500 text-center p-4">कोई डेटा उपलब्ध नहीं है।</p>;
@@ -60,6 +64,7 @@ export default function ReusableTable({ data}) {
             ))}
           </tbody>
       </table>
+
     </div>
   );
 }

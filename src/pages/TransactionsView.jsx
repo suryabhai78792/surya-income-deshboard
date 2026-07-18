@@ -14,14 +14,14 @@ const processedData = React.useMemo(() => {
 
   return (
      
-    <div className="p-5 bg-white rounded-xl border border-gray-300 ">
+    <div className="p-5 bg-white rounded-xl border border-gray-300 mb-0">
       <h2 className="text-xl font-bold mb-4">All Transactions ({processedData.length})</h2>    
       <p className="font-semibold text-gray-800"> Date Income </p>
-      <div className=" h-[500px] overflow-y-auto ">
+      <div className=" h-[530px] overflow-y-auto mb-0 ">
         <ul className="space-y-2">
           {processedData.length > 0 ? (
             processedData.map((item, index) => (
-              <li key={index} className="p-3 border-b border-gray-100 flex justify-between items-center hover:bg-gray-50">
+              <li key={index} className="p-3 border-b border-gray-100 flex justify-between items-center hover:bg-gray-50 ">
                 <div className="flex items-center gap-4">
                   {/* 1. सीरियल नंबर */}
                   <p className="font-semibold text-gray-800"> {index + 1}</p>

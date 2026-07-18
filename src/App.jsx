@@ -1,8 +1,9 @@
 import React from 'react';
-import { LayoutDashboard, Receipt, BarChart3, Settings, Plus } from 'lucide-react';
+import { LayoutDashboard, Receipt, BarChart3, Settings, Plus, Bell, User  } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react'
 
 import './App.css'
+import StatsCard from './components/StatsCard';
 import { convertDataByMode } from './components/dataConverter';
 import MyButton from './components/MyButton';
 import DashboardView from './pages/DashboardView';
@@ -28,6 +29,12 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
   const [viewMode, setViewMode] = useState('yearly'); // 'daily', 'yearly', 'final'
   const [dateInput, setDateInput] = useState(''); // YYYY-MM-DD फॉर्मेट के लिए
   const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
+
+  const [income, setIncome] = useState("2,84,345");
+  const [expense, setExpense] = useState("1,89,234");
+  const [savings, setSavings] = useState("95,111");
+  const [budget, setbudget] = useState("20,000"); // <--- यह लाइन जोड़ें
+
 
 
   const modalContainerRef = useRef(null)
@@ -131,10 +138,28 @@ return (
     // पूरे पेज को एक फिक्स्ड हाइट दें ताकि बाहर वाला स्क्रोल बार न आए
     <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
       
+
       {/* 1. हेडर (फिक्स्ड रहेगा) */}
-      <header className="bg-white shadow-md p-6 border-b border-gray-300 flex-shrink-0">
-         <h1 className="text-2xl font-bold text-blue-600">Finance Tracker</h1>
-      </header>
+<header className="bg-white shadow-md p-6 border-b border-gray-300 flex-shrink-0 flex items-center justify-between">
+  
+  {/* बायां हिस्सा: टाइटल */}
+  <h1 className="text-2xl font-bold text-blue-600">Finance Tracker</h1>
+
+  {/* दाहिना हिस्सा: बेल और यूजर आइकॉन */}
+  <div className="flex items-center gap-4">
+    {/* बेल आइकॉन (Lucide-react से Bell इम्पोर्ट करना न भूलें) */}
+    <Bell className="text-gray-500 cursor-pointer" size={24} />
+    
+    {/* यूजर आइकॉन */}
+    <div className="bg-gray-200 p-2 rounded-full cursor-pointer">
+      <User className="text-gray-600" size={20} />
+    </div>
+  </div>
+  
+</header>
+
+
+
 
       {/* 2. मुख्य कंटेनर (साइडबार + कंटेंट) */}
       <div className="flex flex-1 overflow-hidden">
@@ -206,39 +231,22 @@ return (
 
         </div>
 
-        {/* मुख्य कंटेंट क्षेत्र (सिर्फ यही स्क्रोल होगा) */}
-        <main className="flex-1 overflow-y-auto p-8">
-           {/* यहाँ आपके कार्ड्स और DashboardView रहेगा */}
-           {/* ... */}
-        {/* 3. इनकम और एक्सपेंस बॉक्स */}
-        <div className="grid grid-cols-4 gap-4 ">
-          <div className="bg-green-50 p-4 rounded-xl border border-green-300">
-            <p className="text-sm text-gray-500">Total Income</p>
-            <h2 className="text-2xl font-bold">₹2,84,345</h2>
-          </div>
-          <div className="bg-red-50 p-4 rounded-xl border border-red-300">
-            <p className="text-sm text-gray-500">Total Expense</p>
-            <h2 className="text-2xl font-bold text-red-500">₹1,89,234</h2>
-          </div>
-          <div className="bg-blue-50 p-4 rounded-xl border border-blue-300">
-            <p className="text-sm text-gray-500">Savings</p>
-            <h2 className="text-2xl font-bold text-red-500">₹95111</h2>
-          </div>
-          <div className="bg-gray-200 p-4 rounded-xl border border-yellow-300">
-            <p className="text-sm text-gray-500">Budget Balance</p>
-            <h2 className="text-2xl font-bold text-red-500">₹20000</h2>
-          </div>
-          {/* ... अन्य कार्ड्स इसी तरह जोड़ें ... */}
-        </div>
-        
 
-<main className="flex-1 p-6">
-  {activeTab === 'dashboard' && <DashboardView data={databaseData} viewMode={viewMode} />}
-  {activeTab === 'transactions' && <TransactionsView data={databaseData}  />}
+{/* मुख्य कंटेंट क्षेत्र */}
+<main className="flex-1 overflow-y-auto p-8 mb-0">
+  
+  {/* 1. केवल एक बार StatsCard कॉल करें */}
+  <StatsCard income={income} expense={expense} savings={savings} budget={budget} />
+
+  {/* 2. दूसरा 'main' हटाकर सीधे DashboardView रखें */}
+  <div className="mt-0"> 
+    {activeTab === 'dashboard' && <DashboardView data={databaseData} viewMode={viewMode} />}
+    {activeTab === 'transactions' && <TransactionsView data={databaseData} />}
+    
+  </div>
+
 </main>
 
-
-        </main>
 
 
       {/* Entry Modal */}
