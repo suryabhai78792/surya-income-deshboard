@@ -3,24 +3,24 @@ import { TrendingUp, TrendingDown } from 'lucide-react';
 
 const StatsCard = ({ income, expense, savings, budget }) => {
   return (
-        <div className="flex gap-4 mb-8 overflow-x-auto pb-4 lg:grid lg:grid-cols-4 lg:overflow-visible">
-          <div className="bg-green-50 p-4 rounded-xl border border-green-700 min-w-[280px] lg:min-w-0">
+        <div className="px-4 flex gap-4 mb-4 overflow-x-auto pb-4 lg:grid lg:grid-cols-4 lg:overflow-visible">
+          <div className="bg-green-50 p-4 rounded-xl border border-green-700 w-[85vw] min-w-[280px] flex-shrink-0 lg:w-auto">
             <p className="font-bold">कुल आय <span className="font-normal text-gray-500">(Total Income)</span></p>
             <h2 className="text-2xl font-bold">₹{income}</h2>            
             <p className="flex items-center gap-1 mt-1 whitespace-nowrap">पिछले महीने से <span className="font-normal text-green-700">+5.2%</span><TrendingUp size={14} className="mr-1 text-green-700" /></p>
           </div>
-          <div className="bg-red-50 p-4 rounded-xl border border-red-700 min-w-[280px] lg:min-w-0">
+          <div className="bg-red-50 p-4 rounded-xl border border-red-700 w-[85vw] min-w-[280px] flex-shrink-0 lg:w-auto">
             <p className="font-bold">कुल खर्च <span className="font-normal text-gray-500">(Total Expense)</span></p>
             <h2 className="text-2xl font-bold">₹{expense}</h2>
             <p className="flex items-center gap-1 mt-1 whitespace-nowrap">पिछले महीने से <span className="font-normal text-red-700"> +8.1% </span> <TrendingUp size={14} className="mr-1 text-red-700" /></p>
           </div>
-          <div className="bg-blue-50 p-4 rounded-xl border border-blue-700 min-w-[280px] lg:min-w-0">
+          <div className="bg-blue-50 p-4 rounded-xl border border-blue-700 w-[85vw] min-w-[280px] flex-shrink-0 lg:w-auto">
             <p className="font-bold">बचत <span className="font-normal text-gray-500">(Savings)</span></p>
             <h2 className="text-2xl font-bold">₹{savings}</h2>
             <p className="flex items-center gap-1 mt-1 whitespace-nowrap text-blue-500">बजट से अधिक</p>
           </div>
                 {/* बाहरी कंटेनर को एक निश्चित ऊँचाई (h-full) दें */}
-                <div className="h-full p-[1px] rounded-xl bg-gradient-to-r from-gray-500 to-orange-400 min-w-[280px] lg:min-w-0">                  
+                <div className="h-full p-[1px] rounded-xl bg-gradient-to-r from-gray-500 to-orange-400 w-[85vw] min-w-[280px] flex-shrink-0 lg:w-auto">                  
                   {/* अंदर वाले कार्ड को भी h-full और flex-col दें ताकि वो ऊपर से नीचे पूरा भरे */}
                   <div className="h-full bg-gray-100 p-4 rounded-[11px] flex flex-col justify-between">
                     <div>
