@@ -29,7 +29,7 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
   const [viewMode, setViewMode] = useState('yearly'); // 'daily', 'yearly', 'final'
   const [dateInput, setDateInput] = useState(''); // YYYY-MM-DD फॉर्मेट के लिए
   const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 
 
@@ -163,7 +163,17 @@ return (
       <div className="flex flex-1 overflow-hidden">
         
         {/* साइडबार */}
-        <div className="w-64 bg-white border-r border-gray-300 p-6 flex-shrink-0 overflow-y-auto">
+<div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-300 p-6 
+  transform transition-transform duration-300 ease-in-out 
+  ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
+  lg:translate-x-0 lg:relative lg:block`}> 
+    
+    {/* क्लोज बटन केवल मोबाइल के लिए */}
+    <div className="flex justify-between items-center mb-6 lg:hidden">
+       <span className="font-bold">Menu</span>
+       <X className="cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
+    </div>
+       
            {/* ... आपका साइडबार कोड यहाँ रहेगा ... */}
 
 
