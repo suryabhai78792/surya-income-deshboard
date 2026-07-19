@@ -1,9 +1,36 @@
 import React from 'react';
+import { useState, useRef } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
+
 const StatsCard = ({ income, expense, savings, budget }) => {
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const scrollRef = useRef(null);
+
+  // यह फंक्शन पता लगाता है कि अभी कौन सा कार्ड सेंटर में है
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const cardWidth = scrollRef.current.offsetWidth;
+      // इंडेक्स कैलकुलेट करना
+      const index = Math.round(scrollLeft / cardWidth);
+      setActiveIndex(index);
+    }
+  };
+
+
   return (
-        <div className="px-4 flex gap-4 mb-4 overflow-x-auto pb-4 lg:grid lg:grid-cols-4 lg:overflow-visible scroll-smooth snap-x snap-mandatory">
+
+
+<div className="flex flex-col gap-4">
+      {/* 1. कार्ड्स वाला हिस्सा */}
+      <div 
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-4 lg:grid lg:grid-cols-4 lg:overflow-visible"
+      >
+        {/* आपके चारों कार्ड्स यहाँ आएंगे */}
           <div className="bg-green-50 p-4 rounded-xl border border-green-700 w-[85vw] min-w-[280px] flex-shrink-0 lg:w-auto snap-center">
             <p className="font-bold">कुल आय <span className="font-normal text-gray-500">(Total Income)</span></p>
             <h2 className="text-2xl font-bold">₹{income}</h2>            
@@ -19,7 +46,6 @@ const StatsCard = ({ income, expense, savings, budget }) => {
             <h2 className="text-2xl font-bold">₹{savings}</h2>
             <p className="flex items-center gap-1 mt-1 whitespace-nowrap text-blue-500">बजट से अधिक</p>
           </div>
-                {/* बाहरी कंटेनर को एक निश्चित ऊँचाई (h-full) दें */}
                 <div className="h-full p-[1px] rounded-xl bg-gradient-to-r from-gray-500 to-orange-400 w-[85vw] min-w-[280px] flex-shrink-0 lg:w-auto snap-center">                  
                   {/* अंदर वाले कार्ड को भी h-full और flex-col दें ताकि वो ऊपर से नीचे पूरा भरे */}
                   <div className="h-full bg-gray-100 p-4 rounded-[11px] flex flex-col justify-between">
@@ -36,12 +62,20 @@ const StatsCard = ({ income, expense, savings, budget }) => {
                     </div>
                   </div>
                 </div>
+      </div>
 
-
-
-
-        </div>
-
+      {/* 2. डॉट्स (Indicators) वाला हिस्सा - जो मोबाइल पर दिखेगा */}
+      <div className="flex justify-center gap-2 lg:hidden">
+        {[0, 1, 2, 3].map((index) => (
+          <div 
+            key={index}
+            className={`h-3 w-3 rounded-full transition-all duration-300 ${
+              activeIndex === index ? 'bg-blue-600 scale-125' : 'bg-gray-300'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
 
 
 
