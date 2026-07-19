@@ -280,7 +280,7 @@ const { tableData: convertedTableData } = convertDataByMode(data, viewMode, 'inc
   }
 
   return (
-   <div>
+   <div >
           {/* 1. केवल एक बार StatsCard कॉल करें */}
   <StatsCard income={income} expense={expense} savings={savings} budget={budget} />
     <div className=" rounded-xl  m-0 p-0 h-[650px] overflow-y-auto " >
