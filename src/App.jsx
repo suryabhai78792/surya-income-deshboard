@@ -1,9 +1,9 @@
 import React from 'react';
-import { LayoutDashboard, Receipt, BarChart3, Settings, Plus, Bell, User  } from 'lucide-react';
+import { LayoutDashboard, Receipt, BarChart3, Settings, Plus, Bell, User, Menu, X  } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react'
 
 import './App.css'
-import StatsCard from './components/StatsCard';
+
 import { convertDataByMode } from './components/dataConverter';
 import MyButton from './components/MyButton';
 import DashboardView from './pages/DashboardView';
@@ -29,11 +29,8 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
   const [viewMode, setViewMode] = useState('yearly'); // 'daily', 'yearly', 'final'
   const [dateInput, setDateInput] = useState(''); // YYYY-MM-DD फॉर्मेट के लिए
   const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-  const [income, setIncome] = useState("2,84,345");
-  const [expense, setExpense] = useState("1,89,234");
-  const [savings, setSavings] = useState("95,111");
-  const [budget, setbudget] = useState("20,000"); // <--- यह लाइन जोड़ें
 
 
 
@@ -143,6 +140,7 @@ return (
 <header className="bg-white  p-6 border-b border-gray-300 flex-shrink-0 flex items-center justify-between">
   
   {/* बायां हिस्सा: टाइटल */}
+  <Menu className="cursor-pointer lg:hidden" onClick={() => setIsSidebarOpen(true)} />
   <h1 className="text-2xl font-bold text-blue-600">Finance Tracker</h1>
 
   {/* दाहिना हिस्सा: बेल और यूजर आइकॉन */}
@@ -235,8 +233,7 @@ return (
 {/* मुख्य कंटेंट क्षेत्र */}
 <main className="flex-1 overflow-y-auto p-8 mb-0">
   
-  {/* 1. केवल एक बार StatsCard कॉल करें */}
-  <StatsCard income={income} expense={expense} savings={savings} budget={budget} />
+
 
   {/* 2. दूसरा 'main' हटाकर सीधे DashboardView रखें */}
   <div> 
@@ -308,3 +305,4 @@ return (
 
 }
 export default App;
+

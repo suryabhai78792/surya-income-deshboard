@@ -1,6 +1,7 @@
 import React from 'react';
 import Chart from 'chart.js/auto' // Chart.js को इम्पोर्ट किया
 import './DashboardView.css'
+import StatsCard from '../components/StatsCard';
 import { convertDataByMode } from '../components/dataConverter';
 import ReusableTable from '../components/ReusableTable';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
@@ -26,6 +27,14 @@ const { tableData: convertedTableData } = convertDataByMode(data, viewMode, 'inc
   const activeChartInstance = useRef(null);
   const chartLoopInterval = useRef(null);
   const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
+
+
+  const [income, setIncome] = useState("2,84,345");
+  const [expense, setExpense] = useState("1,89,234");
+  const [savings, setSavings] = useState("95,111");
+  const [budget, setbudget] = useState("20,000"); // <--- यह लाइन जोड़ें
+
+
 
 
     // नया इफेक्ट: जैसे ही data or viewMode बदलेगा, चार्ट तुरंत नए मोड के साथ रीस्टार्ट होगा
@@ -272,8 +281,9 @@ const { tableData: convertedTableData } = convertDataByMode(data, viewMode, 'inc
 
   return (
    <div>
-      <h2 className=" font-bold p-0 m-0 w-full text-center"  >Dashboard View</h2>   
-    <div className=" rounded-xl  m-0 p-0 h-[630px] overflow-y-auto " >
+          {/* 1. केवल एक बार StatsCard कॉल करें */}
+  <StatsCard income={income} expense={expense} savings={savings} budget={budget} />
+    <div className=" rounded-xl  m-0 p-0 h-[650px] overflow-y-auto " >
       {/* यहाँ अपना चार्ट या डैशबोर्ड वाला कोड लिखें */}
         {/* Charts Section */}
         {/* 4. चार्ट्स का भाग */}
