@@ -1,4 +1,5 @@
 import React from 'react';
+import './StatsCard.css';
 import { useState, useRef } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
@@ -28,7 +29,7 @@ const StatsCard = ({ income, expense, savings, budget }) => {
       <div 
         ref={scrollRef}
         onScroll={handleScroll}
-        className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-4 lg:grid lg:grid-cols-4 lg:overflow-visible"
+        className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-4 scrollbar-hide lg:grid lg:grid-cols-4 lg:overflow-visible"
       >
         {/* आपके चारों कार्ड्स यहाँ आएंगे */}
           <div className="bg-green-50 p-4 rounded-xl border border-green-700 w-[85vw] min-w-[280px] flex-shrink-0 lg:w-auto snap-center">
@@ -65,7 +66,7 @@ const StatsCard = ({ income, expense, savings, budget }) => {
       </div>
 
       {/* 2. डॉट्स (Indicators) वाला हिस्सा - जो मोबाइल पर दिखेगा */}
-      <div className="flex justify-center gap-2 lg:hidden">
+      <div className="flex justify-center mb-2 gap-2 lg:hidden" >
         {[0, 1, 2, 3].map((index) => (
           <div 
             key={index}
