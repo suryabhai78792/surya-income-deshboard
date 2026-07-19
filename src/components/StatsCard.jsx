@@ -70,7 +70,7 @@ const StatsCard = ({ income, expense, savings, budget }) => {
         {[0, 1, 2, 3].map((index) => (
           <div 
             key={index}
-            className={`h-3 w-3 rounded-full transition-all duration-300 ${
+            className={`h-1 w-1 rounded-full transition-all duration-300 ${
               activeIndex === index ? 'bg-blue-600 scale-125' : 'bg-gray-300'
             }`}
           />
