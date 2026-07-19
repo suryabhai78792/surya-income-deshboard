@@ -241,7 +241,7 @@ return (
 
 
 {/* मुख्य कंटेंट क्षेत्र */}
-<main className="flex-1 overflow-y-auto mb-0 lg:p-8">
+<main className="flex-1 overflow-y-auto p-2 mb-0 lg:p-8">
   
 
 
