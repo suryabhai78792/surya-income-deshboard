@@ -326,9 +326,9 @@ const { tableData: convertedTableData } = convertDataByMode(data, viewMode, 'inc
           
         </div>
 
-        <div className="table-responsive" className="bg-white p-6 mt-6 rounded-xl border border-gray-300">
+       
           <ReusableTable data={convertedTableData} />
-        </div>
+        
 
       </div>
 
