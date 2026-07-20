@@ -6,3 +6,8 @@
   -ms-overflow-style: none;  /* IE और Edge */
   scrollbar-width: none;  /* Firefox */
 }
+@media (orientation: landscape) and (max-width: 1024px) {
+  .landscape-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
