@@ -29,7 +29,7 @@ const StatsCard = ({ income, expense, savings, budget }) => {
       <div 
         ref={scrollRef}
         onScroll={handleScroll}
-        className="grid grid-flow-col auto-cols-[85vw] md:grid-flow-row md:grid-cols-2 lg:grid-cols-4 gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-4 md:overflow-visible scrollbar-hide"
+        className="grid grid-flow-col auto-cols-[85vw] md:grid-flow-row md:grid-cols-2 lg:grid-cols-4 gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-0 md:pb-4 md:overflow-visible scrollbar-hide"
       >
         {/* आपके चारों कार्ड्स यहाँ आएंगे */}
           <div className="bg-green-50 p-4 rounded-xl border border-green-700 min-w-[85vw] md:min-w-0  snap-center snap-always">
