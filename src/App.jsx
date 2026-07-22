@@ -166,10 +166,10 @@ return (
 <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-300 p-6 
   transform transition-transform duration-300 ease-in-out 
   ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
-  lg:translate-x-0 lg:relative lg:block`}> 
+  lg:translate-x-0 lg:relative lg:block max-md:landscape:block hidden md:block`}> 
     
     {/* क्लोज बटन केवल मोबाइल के लिए */}
-    <div className="flex justify-between items-center mb-6 lg:hidden">
+    <div className="flex justify-between items-center max-md:landscape:hidden mb-6 lg:hidden">
        <span className="font-bold">Menu</span>
        <X className="cursor-pointer" onClick={() => setIsSidebarOpen(false)} />
     </div>
