@@ -70,20 +70,37 @@ function App() {
       })
   };
 
-  // 1. पहला इफेक्ट: स्क्रीन लोड होने पर टोकन, रोल और बैकएंड वैलिडेट करेगा
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const role = localStorage.getItem('role');
+useEffect(() => {
+    // 1. सबसे पहले URL से पैरामीटर निकालें
+    const fullUrl = window.location.href;
+    console.log("Current Full URL:", fullUrl);
 
-    // अगर टोकन या सही रोल मौजूद नहीं है, तो तुरंत लॉगिन पेज पर भेज दें
-    if (!token || role !== 'client_admin') {
-      alert("Unauthorized Access! कृपया पहले सही क्रेडेंशियल के साथ लॉगिन करें।");
-      window.location.href = "https://bsh-frontend.onrender.com"; // आपका मुख्य लॉगिन पोर्टल
+    const queryParams = new URLSearchParams(window.location.search);
+    const tokenFromUrl = queryParams.get('token');
+    const roleFromUrl = queryParams.get('role');
+
+    // 🔍 चेक करने के लिए तुरंत अलर्ट दें कि URL से टोकन मिला या नहीं
+    alert(`URL Check -> Token from URL: ${tokenFromUrl ? tokenFromUrl.substring(0, 15) + "..." : "NAYA TOKEN NAHI MILA!"}`);
+
+    if (tokenFromUrl) {
+      localStorage.setItem('token', tokenFromUrl);
+      localStorage.setItem('role', roleFromUrl || 'client_admin');
+      
+      // यूआरएल साफ़ करें
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    // 2. अब लोकल स्टोरेज से चेक करें
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      alert("Unauthorized Access! लोकल स्टोरेज में टोकन नहीं मिला।");
+      window.location.href = "https://bsh-frontend.onrender.com";
     } else {
-      setIsAuth(true); // 👈 टोकन और रोल दोनों सही मिलने पर ही ऑथेंटिकेट माना जाएगा
+      // ✅ टोकन मिल गया! अब कोई एरर नहीं आएगी
+      setIsAuth(true);
     }
   }, []);
-
 
   // 5. बैकअप डेटा डाउनलोड लॉजिक
   const handleDownloadBackup = () => {
