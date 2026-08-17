@@ -70,22 +70,20 @@ function App() {
       })
   };
 
-  // 1. पहला इफेक्ट: सिर्फ स्क्रीन लोड होने पर बैकएंड से डेटा लाएगा
+  // 1. पहला इफेक्ट: स्क्रीन लोड होने पर टोकन, रोल और बैकएंड वैलिडेट करेगा
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
 
-    // अगर टोकन मौजूद नहीं है, तो तुरंत लॉगिन पेज पर भेज दें
-    if (!token) {
-      alert("Unauthorized Access! कृपया पहले लॉगिन करें।");
-      window.location.href = "https://bsh-frontend.onrender.com"; // या आपका लॉगिन पेज यूआरएल
-      // ध्यान दें: यहाँ setIsAuth(false) ही रहेगा, इसलिए नीचे वाला लेआउट कभी नहीं दिखेगा
+    // अगर टोकन या सही रोल मौजूद नहीं है, तो तुरंत लॉगिन पेज पर भेज दें
+    if (!token || role !== 'client_admin') {
+      alert("Unauthorized Access! कृपया पहले सही क्रेडेंशियल के साथ लॉगिन करें।");
+      window.location.href = "https://bsh-frontend.onrender.com"; // आपका मुख्य लॉगिन पोर्टल
     } else {
-      setIsAuth(true); // 👈 टोकन मिल गया, मतलब यूजर सही है
-      loadTableData(); // अब डेटा लोड करें
+      setIsAuth(true); // 👈 टोकन और रोल दोनों सही मिलने पर ही ऑथेंटिकेट माना जाएगा
+      loadTableData(); // डेटा लोड करें
     }
-    loadTableData();
   }, []);
-
 
 
   // 5. बैकअप डेटा डाउनलोड लॉजिक
@@ -102,7 +100,7 @@ function App() {
   }
 
 
-// 👈 अगर यूजर Auth नहीं है, तो उसे कुछ भी (लेआउट भी) मत दिखाओ 
+  // 👈 अगर यूजर Auth नहीं है, तो उसे कुछ भी (लेआउट भी) मत दिखाओ 
   if (!isAuth) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
