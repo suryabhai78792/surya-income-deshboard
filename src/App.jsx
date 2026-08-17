@@ -81,7 +81,6 @@ function App() {
       window.location.href = "https://bsh-frontend.onrender.com"; // आपका मुख्य लॉगिन पोर्टल
     } else {
       setIsAuth(true); // 👈 टोकन और रोल दोनों सही मिलने पर ही ऑथेंटिकेट माना जाएगा
-      loadTableData(); // डेटा लोड करें
     }
   }, []);
 
