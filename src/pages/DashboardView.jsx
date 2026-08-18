@@ -28,7 +28,7 @@ const originalLoanData = [
 
 
 
-const DashboardView = ({ data, viewMode }) => {
+const DashboardView = ({ data, viewMode, onOpenProfile }) => {
   const deviceView = useDeviceView();
   const [pieData, setPieData] = useState(originalPieData);
   const [loanData, setLoanData] = useState(originalLoanData);
@@ -320,12 +320,14 @@ const DashboardView = ({ data, viewMode }) => {
             {/* बायां हिस्सा: टाइटल */}
             {/* यूजर आइकॉन */}
             <div className="bg-gray-200 p-2 rounded-full cursor-pointer">
+{/*=========================================================================================================*/}
               <User className="text-gray-600" size={20} onClick={() => setIsProfileOpen(true)} />
               {/* 3. प्रोफाइल मॉडल को यहाँ कॉल करें */}
               <ProfileModal
                 isOpen={isProfileOpen}
                 onClose={() => setIsProfileOpen(false)}
               />
+{/*=========================================================================================================*/}
             </div>
 
             <DateTime />
