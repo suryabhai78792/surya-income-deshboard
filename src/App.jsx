@@ -135,7 +135,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-
+      <DashboardView onOpenProfile={() => setIsProfileOpen(true)} />
       {/* मुख्य कंटेंट जहाँ आप अलग-अलग लेआउट रेंडर करेंगे */}
       <div className="flex-1">
         {/*=========================================================================================================*/}
