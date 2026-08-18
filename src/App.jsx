@@ -136,9 +136,6 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
 
-
-
-
       {/* मुख्य कंटेंट जहाँ आप अलग-अलग लेआउट रेंडर करेंगे */}
       <div className="flex-1">
         {/*=========================================================================================================*/}
@@ -224,13 +221,7 @@ function App() {
                 {/* यूजर आइकॉन */}
                 <div className="bg-gray-200 p-2 rounded-full cursor-pointer relative">
                   <User className="text-gray-600" size={20} onClick={() => setIsProfileOpen(true)} />
-                  {/* यहाँ हम मोबाइल और डेस्कटॉप दोनों के लिए DashboardView को भेज रहे हैं */}
-
-                  <DashboardView
-                    onOpenProfile={() => setIsProfileOpen(true)}
-                  />
-
-                  {/* प्रोफाइल मॉडल ऐप में सिर्फ एक बार यहाँ रहेगा */}
+                  {/* 3. प्रोफाइल मॉडल को यहाँ कॉल करें */}
                   <ProfileModal
                     isOpen={isProfileOpen}
                     onClose={() => setIsProfileOpen(false)}
@@ -239,6 +230,9 @@ function App() {
               </div>
 
             </header>
+
+
+
 
             {/* 2. मुख्य कंटेनर (साइडबार + कंटेंट) */}
             <div className="flex flex-1 overflow-hidden">
