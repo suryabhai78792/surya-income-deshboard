@@ -1,4 +1,7 @@
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { fetchUserProfile } from './pages/profileApi';
+
 import { LayoutDashboard, CreditCard, Receipt, BarChart3, Settings, Plus, Bell, User, Menu, X, ArrowLeftRight, Wallet, Target, TrendingUp, FileText, Clock } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react'
 
@@ -49,7 +52,12 @@ function App() {
   const GET_DATA_URL = 'https://my-income-backend.onrender.com/getdata'
   const SAVE_DATA_URL = 'https://my-income-backend.onrender.com/save'
 
-
+  // यह पूरे ऐप के लिए डेटा लोड करके रख लेगा
+  useQuery({
+    queryKey: ['userProfile'],
+    queryFn: fetchUserProfile, // अब यहाँ कोड बहुत साफ दिख रहा है!
+    staleTime: Infinity, // यह सुनिश्चित करता है कि दोबारा API कॉल न हो
+  });
 
 
   // API: Load Table Data
@@ -70,7 +78,7 @@ function App() {
       })
   };
 
-useEffect(() => {
+  useEffect(() => {
     // 1. सबसे पहले URL से पैरामीटर निकालें
     const fullUrl = window.location.href;
     console.log("Current Full URL:", fullUrl);
@@ -85,7 +93,7 @@ useEffect(() => {
     if (tokenFromUrl) {
       localStorage.setItem('token', tokenFromUrl);
       localStorage.setItem('role', roleFromUrl || 'client_admin');
-      
+
       // यूआरएल साफ़ करें
       window.history.replaceState({}, document.title, window.location.pathname);
     }
