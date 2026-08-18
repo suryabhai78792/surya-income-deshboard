@@ -3,7 +3,7 @@ import Chart from 'chart.js/auto' // Chart.js को इम्पोर्ट �
 import './DashboardView.css'
 import DateTime from '../components/DateTime';
 import StatsCard from '../components/StatsCard';
-import ProfileModal from './ProfileModal'; // अपनी फाइल का सही पाथ दें
+
 import { useDeviceView } from '../components/useDeviceView';
 import { convertDataByMode } from '../components/dataConverter';
 import PieChartCard from '../components/PieChartCard';
@@ -40,7 +40,7 @@ const DashboardView = ({ data, viewMode }) => {
   const activeChartInstance = useRef(null);
   const chartLoopInterval = useRef(null);
   const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   // ** पहले वाले के लिए **
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -334,14 +334,6 @@ const DashboardView = ({ data, viewMode }) => {
           >
             ✕
           </button>
-        </div>
-
-        {/* असली प्रोफाइल का कंटेंट या ProfileModal */}
-        <div className="p-4 overflow-y-auto flex-1">
-          <ProfileModal 
-            isOpen={isProfileOpen} 
-            onClose={() => setIsProfileOpen(false)} 
-          />
         </div>
 
       </div>
