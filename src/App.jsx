@@ -224,12 +224,13 @@ function App() {
                   onClick={() => setIsProfileOpen(true)} // 👈 यहाँ क्लिक करते ही स्टेट true हो जाएगी
                 >
                   <User className="text-gray-600" size={20} />
-                  <ProfileModal
-                    isOpen={isProfileOpen}
-                    onClose={() => setIsProfileOpen(false)}
-                  />
                 </div>
-                
+
+                <ProfileModal
+                  isOpen={isProfileOpen}
+                  onClose={() => setIsProfileOpen(false)}
+                />
+
               </div>
 
             </header>
