@@ -219,14 +219,17 @@ function App() {
                 <Bell className="text-gray-500 cursor-pointer" size={24} />
 
                 {/* यूजर आइकॉन */}
-                <div className="bg-gray-200 p-2 rounded-full cursor-pointer relative">
-                  <User className="text-gray-600" size={20} onClick={() => setIsProfileOpen(true)} />
-                  {/* 3. प्रोफाइल मॉडल को यहाँ कॉल करें */}
+                <div
+                  className="bg-gray-200 p-2 rounded-full cursor-pointer"
+                  onClick={() => setIsProfileOpen(true)} // 👈 यहाँ क्लिक करते ही स्टेट true हो जाएगी
+                >
+                  <User className="text-gray-600" size={20} />
                   <ProfileModal
                     isOpen={isProfileOpen}
                     onClose={() => setIsProfileOpen(false)}
                   />
                 </div>
+                
               </div>
 
             </header>

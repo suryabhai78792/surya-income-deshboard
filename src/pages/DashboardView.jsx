@@ -312,6 +312,42 @@ const DashboardView = ({ data, viewMode }) => {
 
   return (
     <div >
+      {/* 👇 यह रहा बाएं से दाएं स्लाइड होने वाला प्रोफाइल ड्रावर (Sidebar Drawer) */}
+      {isProfileOpen && (
+        <div className="fixed inset-0 z-50 flex">
+
+          {/* 1. पीछे का काला धुंधला पर्दा (Overlay) - जिस पर क्लिक करने से प्रोफाइल बंद हो जाएगी */}
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+            onClick={() => setIsProfileOpen(false)}
+          ></div>
+
+          {/* 2. बाएं से दाएं स्लाइड होकर आने वाला बॉक्स (Tailwind CSS transition का कमाल) */}
+          <div className="relative w-4/5 max-w-sm bg-h-full bg-white h-full shadow-xl z-10 flex flex-col transform transition-transform duration-300 ease-out translate-x-0">
+
+            {/* ड्रावर के अंदर अपनी प्रोफाइल या ProfileModal का कंटेंट */}
+            <div className="p-4 border-b flex justify-between items-center bg-gray-100">
+              <h2 className="font-bold text-lg text-gray-800">यूजर प्रोफाइल</h2>
+              <button
+                onClick={() => setIsProfileOpen(false)}
+                className="text-gray-600 font-bold text-xl px-2"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* असली प्रोफाइल का कंटेंट या ProfileModal */}
+            <div className="p-4 overflow-y-auto flex-1">
+              <ProfileModal
+                isOpen={isProfileOpen}
+                onClose={() => setIsProfileOpen(false)}
+              />
+            </div>
+
+          </div>
+        </div>
+      )}
+
       {/*=========================================================================================================*/}
       {/* 1. मोबाइल पोर्ट्रेट व्यू के लिए लेआउट */}
       {/*=========================================================================================================*/}
@@ -320,14 +356,18 @@ const DashboardView = ({ data, viewMode }) => {
           <header className="fixed top-0 left-0 right-0 z-50 bg-white py-3 px-3 border-b border-gray-300 flex items-center justify-between ">
 
             {/* बायां हिस्सा: टाइटल */}
-            {/* यूजर आइकॉन */}
-            <div className="bg-gray-200 p-2 rounded-full cursor-pointer">
-              <User className="text-gray-600" size={20} onClick={() => setIsProfileOpen(true)} />
-                <ProfileModal
-                  isOpen={isProfileOpen}
-                  onClose={() => setIsProfileOpen(false)}
-                />
 
+
+            {/* यूजर आइकॉन */}
+            <div
+              className="bg-gray-200 p-2 rounded-full cursor-pointer"
+              onClick={() => setIsProfileOpen(true)} // 👈 यहाँ क्लिक करते ही स्टेट true हो जाएगी
+            >
+              <User className="text-gray-600" size={20} />
+              <ProfileModal
+                isOpen={isProfileOpen}
+                onClose={() => setIsProfileOpen(false)}
+              />
             </div>
 
             <DateTime />
