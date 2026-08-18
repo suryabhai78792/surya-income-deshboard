@@ -40,7 +40,7 @@ const DashboardView = ({ data, viewMode }) => {
   const activeChartInstance = useRef(null);
   const chartLoopInterval = useRef(null);
   const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
-
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   // ** पहले वाले के लिए **
   const scrollRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
