@@ -13,7 +13,7 @@ export default function ProfileModal({ isOpen, onClose }) {
 
   return (
     <div className="absolute right-0 top-12 z-50 w-[320px] rounded-2xl bg-white p-5 shadow-2xl border border-gray-200">
-      <div 
+      <div
         className="fixed inset-0 bg-gray bg-opacity-50 transition-opacity"
         onClick={onClose}
       ></div>
