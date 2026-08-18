@@ -28,7 +28,7 @@ const originalLoanData = [
 
 
 
-const DashboardView = ({ data, viewMode, onOpenProfile }) => {
+const DashboardView = ({ data, viewMode }) => {
 const deviceView = useDeviceView();
 const [pieData, setPieData] = useState(originalPieData);
 const [loanData, setLoanData] = useState(originalLoanData);
@@ -320,7 +320,7 @@ const handleScroll2 = (e) => {
             {/* बायां हिस्सा: टाइटल */}
             {/* यूजर आइकॉन */}
             <div className="bg-gray-200 p-2 rounded-full cursor-pointer">
-              <User className="text-gray-600" size={20} onClick={onOpenProfile} />
+              <User className="text-gray-600" size={20} />
             </div>
 
           <DateTime />
