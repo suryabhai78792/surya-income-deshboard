@@ -222,6 +222,7 @@ function App() {
                 <div className="bg-gray-200 p-2 rounded-full cursor-pointer relative">
                   <User className="text-gray-600" size={20} onClick={() => setIsProfileOpen(true)} />
                   {/* 3. प्रोफाइल मॉडल को यहाँ कॉल करें */}
+                  <DashboardView onOpenProfile={() => setIsProfileOpen(true)} />
                   <ProfileModal
                     isOpen={isProfileOpen}
                     onClose={() => setIsProfileOpen(false)}
