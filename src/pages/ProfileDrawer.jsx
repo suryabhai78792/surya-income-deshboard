@@ -5,10 +5,10 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex">
+    <div className="fixed inset-0 z-[9999] flex">
       {/* 1. पीछे का काला धुंधला पर्दा (Overlay) */}
       <div 
-        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+        className="fixed inset-0 bg-gray bg-opacity-50 transition-opacity"
         onClick={onClose}
       ></div>
 
