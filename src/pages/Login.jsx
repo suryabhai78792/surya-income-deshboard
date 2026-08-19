@@ -42,18 +42,6 @@ export default function FinanceLogin({ onLoginSuccess }) {
         localStorage.setItem('token', token);
         localStorage.setItem('role', role || 'client_admin');
         
-        // 3. सॉकेट कनेक्ट करें (ताकि हार्टबीट चालू रहे)
-        const socket = io(API_BASE_URL, {
-          query: { token: token, productId: productId }
-        });
-
-        // हार्टबीट (Heartbeat) चालू करें
-        setInterval(() => {
-          if (socket && socket.connected) {
-            socket.emit('client_heartbeat');
-          }
-        }, 60000);
-
         // App.jsx को बताना कि लॉगिन सफल हो गया है
         if (onLoginSuccess) {
           onLoginSuccess(); // यह App.jsx वाले फंक्शन को ट्रिगर कर देता है
