@@ -105,7 +105,7 @@ function App() {
     } else {
       // ✅ टोकन मिल गया! अब कोई एरर नहीं आएगी
       setIsAuth(true);
-      loadTableData();
+    //  loadTableData(); // 👈 यहाँ टेबल डेटा लोड फंक्शन कॉल हो जाएगा
     }
   }, []);
 
