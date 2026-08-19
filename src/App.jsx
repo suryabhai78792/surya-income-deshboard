@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchUserProfile } from './pages/profileApi';
-import { Loader2 } from 'lucide-react'; // इसे ऊपर इम्पोर्ट कर लें
+
 import { LayoutDashboard, CreditCard, Receipt, BarChart3, Settings, Plus, Bell, User, Menu, X, ArrowLeftRight, Wallet, Target, TrendingUp, FileText, Clock } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react'
 
@@ -123,18 +123,10 @@ function App() {
 
 
   // 👈 अगर यूजर Auth नहीं है, तो उसे कुछ भी (लेआउट भी) मत दिखाओ 
-  if (!isAuth) {
+if (!isAuth) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50">
-        {/* स्पिनर एनीमेशन */}
-        <div className="relative w-16 h-16">
-          <div className="absolute top-0 left-0 w-full h-full border-4 border-gray-200 rounded-full"></div>
-          <div className="absolute top-0 left-0 w-full h-full border-4 border-blue-600 rounded-full border-t-transparent animate-spin"></div>
-        </div>
-
-        {/* नीचे थोड़ा टेक्स्ट (वैकल्पिक) */}
-        <Loader2 size={40} className="text-blue-600 animate-spin" />
-        <p className="mt-4 text-sm font-medium text-gray-400 animate-pulse">Loading Dashboard...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
       </div>
     );
   }
