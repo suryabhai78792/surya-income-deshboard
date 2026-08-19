@@ -81,7 +81,9 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
                 {/* 👇 लॉग आउट का बटन - अब बाएं साइड (justify-start) आ गया है */}
                 <div className="flex justify-start pt-2">
                     <button
+                        type="button"
                         onClick={() => {
+                            console.log("लॉग आउट बटन पर क्लिक हो गया!");
                             localStorage.clear();
 
                             // पेज रीलोड करें ताकि App.jsx का useEffect फिर से चले 
