@@ -37,7 +37,7 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
                             </p>
                         </div>
                     </div>
-                    
+
                     {/* क्लोज बटन अब बिल्कुल सीध में दाहिने कोने पर रहेगा */}
                     <button
                         onClick={onClose}
@@ -82,8 +82,12 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
                 <div className="flex justify-start pt-2">
                     <button
                         onClick={() => {
-                            localStorage.clear(); // 👈 टोकन और सारा डेटा साफ़ कर देगा
-                            window.location.reload(); // 👈 पेज को रिफ्रेश करके लॉगिन स्क्रीन पर ले जाएगा
+                            // 1. सारा लोकल स्टोरेज और सेशन साफ़ करें
+                            localStorage.clear();
+                            sessionStorage.clear();
+
+                            // 2. डेस्कटॉप और मोबाइल दोनों के लिए यूनिवर्सल रिफ्रेश और रीडायरेक्ट
+                            window.location.href = window.location.origin;
                         }}
                         className="flex cursor-pointer items-center gap-2 rounded-md border-none bg-red-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-red-600 shadow-sm"
                     >
