@@ -56,6 +56,7 @@ function App() {
   useQuery({
     queryKey: ['userProfile'],
     queryFn: fetchUserProfile, // अब यहाँ कोड बहुत साफ दिख रहा है!
+    enabled: !!localStorage.getItem('token'),
     staleTime: Infinity, // यह सुनिश्चित करता है कि दोबारा API कॉल न हो
   });
 
@@ -87,9 +88,6 @@ function App() {
     const tokenFromUrl = queryParams.get('token');
     const roleFromUrl = queryParams.get('role');
 
-    // 🔍 चेक करने के लिए तुरंत अलर्ट दें कि URL से टोकन मिला या नहीं
-    alert(`URL Check -> Token from URL: ${tokenFromUrl ? tokenFromUrl.substring(0, 15) + "..." : "NAYA TOKEN NAHI MILA!"}`);
-
     if (tokenFromUrl) {
       localStorage.setItem('token', tokenFromUrl);
       localStorage.setItem('role', roleFromUrl || 'client_admin');
@@ -107,6 +105,7 @@ function App() {
     } else {
       // ✅ टोकन मिल गया! अब कोई एरर नहीं आएगी
       setIsAuth(true);
+      loadTableData();
     }
   }, []);
 

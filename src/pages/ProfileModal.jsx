@@ -77,11 +77,8 @@ export default function ProfileModal({ isOpen, onClose }) {
         <button
           type="button"
           onClick={() => {
-            //            localStorage.clear(); // 👈 टोकन और सारा डेटा साफ़ कर देगा
-            //            window.location.reload(); // 👈 पेज को रिफ्रेश करके लॉगिन स्क्रीन पर ले जाएगा
-            console.log("लॉग आउट बटन पर क्लिक हो गया!");
-            localStorage.clear();
-            window.location.reload();
+            localStorage.clear(); // 👈 टोकन और सारा डेटा साफ़ कर देगा
+            window.location.reload(); // 👈 पेज को रिफ्रेश करके लॉगिन स्क्रीन पर ले जाएगा
           }}
           className="flex cursor-pointer items-center gap-2 rounded-md border-none bg-red-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-red-600"
         >

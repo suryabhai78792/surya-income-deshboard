@@ -83,7 +83,6 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
                     <button
                         type="button"
                         onClick={() => {
-                            console.log("लॉग आउट बटन पर क्लिक हो गया!");
                             localStorage.clear();
                             window.location.reload();
                         }}
