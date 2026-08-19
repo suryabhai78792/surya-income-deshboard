@@ -85,9 +85,6 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
                         onClick={() => {
                             console.log("लॉग आउट बटन पर क्लिक हो गया!");
                             localStorage.clear();
-
-                            // पेज रीलोड करें ताकि App.jsx का useEffect फिर से चले 
-                            // और टोकन न मिलने पर वह आपको मुख्य लॉगिन पेज पर भेज दे
                             window.location.reload();
                         }}
                         className="flex cursor-pointer items-center gap-2 rounded-md border-none bg-red-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-red-600 shadow-sm"

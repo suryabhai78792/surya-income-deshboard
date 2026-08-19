@@ -13,10 +13,6 @@ export default function ProfileModal({ isOpen, onClose }) {
 
   return (
     <div className="absolute right-0 top-12 z-50 w-[320px] rounded-2xl bg-white p-5 shadow-2xl border border-gray-200">
-      <div
-        className="fixed inset-0 bg-gray bg-opacity-50 transition-opacity"
-        onClick={onClose}
-      ></div>
 
       {/* पॉपअप का हेडिंग और क्लोज बटन */}
       <div className="flex items-center justify-between">
@@ -85,9 +81,6 @@ export default function ProfileModal({ isOpen, onClose }) {
             //            window.location.reload(); // 👈 पेज को रिफ्रेश करके लॉगिन स्क्रीन पर ले जाएगा
             console.log("लॉग आउट बटन पर क्लिक हो गया!");
             localStorage.clear();
-
-            // पेज रीलोड करें ताकि App.jsx का useEffect फिर से चले 
-            // और टोकन न मिलने पर वह आपको मुख्य लॉगिन पेज पर भेज दे
             window.location.reload();
           }}
           className="flex cursor-pointer items-center gap-2 rounded-md border-none bg-red-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-red-600"
@@ -101,3 +94,4 @@ export default function ProfileModal({ isOpen, onClose }) {
     </div>
   );
 }
+
