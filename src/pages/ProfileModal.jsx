@@ -79,10 +79,11 @@ export default function ProfileModal({ isOpen, onClose }) {
       {/* लॉग आउट का बटन */}
       <div className="flex justify-end">
         <button
+          type="button"
           onClick={() => {
             //            localStorage.clear(); // 👈 टोकन और सारा डेटा साफ़ कर देगा
             //            window.location.reload(); // 👈 पेज को रिफ्रेश करके लॉगिन स्क्रीन पर ले जाएगा
-
+            console.log("लॉग आउट बटन पर क्लिक हो गया!");
             localStorage.clear();
 
             // पेज रीलोड करें ताकि App.jsx का useEffect फिर से चले 
