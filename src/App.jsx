@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchUserProfile } from './pages/profileApi';
-
+import FinanceLogin from './pages/Login';
 import { LayoutDashboard, CreditCard, Receipt, BarChart3, Settings, Plus, Bell, User, Menu, X, ArrowLeftRight, Wallet, Target, TrendingUp, FileText, Clock } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react'
 
@@ -56,7 +56,7 @@ function App() {
   useQuery({
     queryKey: ['userProfile'],
     queryFn: fetchUserProfile, // अब यहाँ कोड बहुत साफ दिख रहा है!
-    enabled: !!localStorage.getItem('token'),
+    enabled: isAuth && !!localStorage.getItem('token'),
     staleTime: Infinity, // यह सुनिश्चित करता है कि दोबारा API कॉल न हो
   });
 
@@ -80,10 +80,7 @@ function App() {
   };
 
   useEffect(() => {
-    // 1. सबसे पहले URL से पैरामीटर निकालें
-    const fullUrl = window.location.href;
-    console.log("Current Full URL:", fullUrl);
-
+    // 1. URL से टोकन चेक करें (अगर कभी यूआरएल से पास होकर आए)
     const queryParams = new URLSearchParams(window.location.search);
     const tokenFromUrl = queryParams.get('token');
     const roleFromUrl = queryParams.get('role');
@@ -91,21 +88,19 @@ function App() {
     if (tokenFromUrl) {
       localStorage.setItem('token', tokenFromUrl);
       localStorage.setItem('role', roleFromUrl || 'client_admin');
-
-      // यूआरएल साफ़ करें
       window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-    // 2. अब लोकल स्टोरेज से चेक करें
+    // 2. लोकल स्टोरेज से टोकन चेक करें
     const token = localStorage.getItem('token');
 
-    if (!token) {
-      window.location.href = "https://bsh-frontend.onrender.com";
-    } else {
-      // ✅ टोकन मिल गया! अब कोई एरर नहीं आएगी
+    if (token) {
       setIsAuth(true);
-      //  loadTableData(); // 👈 यहाँ टेबल डेटा लोड फंक्शन कॉल हो जाएगा
+      //  loadTableData(); // 👈 यहाँ डेटा लोड फंक्शन चालू कर दिया
+    } else {
+      setIsAuth(false);
     }
+    setIsLoading(false); // चेकिंग खत्म, लोडिंग बंद
   }, []);
 
   // 5. बैकअप डेटा डाउनलोड लॉजिक
@@ -122,12 +117,23 @@ function App() {
   }
 
 
-  // 👈 अगर यूजर Auth नहीं है, तो उसे कुछ भी (लेआउट भी) मत दिखाओ 
-if (!isAuth) {
+  // जब तक चेक हो रहा है, तब तक गोल घूमने वाला स्पिनर दिखेगा
+  if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
       </div>
+    );
+  }
+
+  // 🔴 अगर टोकन नहीं है (यानी लॉग इन नहीं है), तो सीधा आपका अपना लॉगिन पेज दिखेगा
+  if (!isAuth) {
+    return (
+      <FinanceLogin
+        onLoginSuccess={() => {
+          setIsAuth(true);
+        }}
+      />
     );
   }
 
