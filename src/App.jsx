@@ -100,8 +100,7 @@ function App() {
     const token = localStorage.getItem('token');
 
     if (!token) {
-      alert("Unauthorized Access! लोकल स्टोरेज में टोकन नहीं मिला।");
-      window.location.href = "https://bsh-frontend.onrender.com";
+        window.location.href = "https://bsh-frontend.onrender.com";
     } else {
       // ✅ टोकन मिल गया! अब कोई एरर नहीं आएगी
       setIsAuth(true);
