@@ -100,11 +100,11 @@ function App() {
     const token = localStorage.getItem('token');
 
     if (!token) {
-        window.location.href = "https://bsh-frontend.onrender.com";
+      window.location.href = "https://bsh-frontend.onrender.com";
     } else {
       // ✅ टोकन मिल गया! अब कोई एरर नहीं आएगी
       setIsAuth(true);
-    //  loadTableData(); // 👈 यहाँ टेबल डेटा लोड फंक्शन कॉल हो जाएगा
+      //  loadTableData(); // 👈 यहाँ टेबल डेटा लोड फंक्शन कॉल हो जाएगा
     }
   }, []);
 
@@ -126,7 +126,7 @@ function App() {
   if (!isAuth) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <h2 className="text-xl font-bold text-gray-500">सुरक्षा जाँच की जा रही है... (Loading)</h2>
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
       </div>
     );
   }
