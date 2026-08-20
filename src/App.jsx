@@ -55,12 +55,12 @@ function App() {
   const SAVE_DATA_URL = 'https://my-income-backend.onrender.com/save'
 
   // यह पूरे ऐप के लिए डेटा लोड करके रख लेगा
-   useQuery({
-     queryKey: ['userProfile'],
-     queryFn: fetchUserProfile, // अब यहाँ कोड बहुत साफ दिख रहा है!
-     enabled: isAuth && !!localStorage.getItem('token'),
-     staleTime: Infinity, // यह सुनिश्चित करता है कि दोबारा API कॉल न हो
-   });
+  useQuery({
+    queryKey: ['userProfile'],
+    queryFn: fetchUserProfile, // अब यहाँ कोड बहुत साफ दिख रहा है!
+    enabled: isAuth && !!localStorage.getItem('token'),
+    staleTime: Infinity, // यह सुनिश्चित करता है कि दोबारा API कॉल न हो
+  });
 
 
 
@@ -106,7 +106,12 @@ function App() {
         const heartbeatInterval = setInterval(() => {
           if (socketRef.current && socketRef.current.connected) {
             socketRef.current.emit('client_heartbeat');
+            // 🟢 क्रोम कंसोल इसे खुद-ब-खुद गिन लेगा (साइड में नंबर आ जाएगा)
+            console.log("📡 क्लाइंट हार्टबीट सिग्नल भेजा गया");
+          } else {
+            console.log("⚠️ सॉकेट कनेक्ट नहीं है, हार्टबीट नहीं भेजा गया");
           }
+
         }, 60000);
       }
 
