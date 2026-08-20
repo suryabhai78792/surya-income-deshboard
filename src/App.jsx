@@ -97,13 +97,13 @@ function App() {
     if (token) {
       console.log("👉 3. टोकन मिल गया है, setIsAuth(true) कर रहे हैं");
       setIsAuth(true);
+
       // 🚀 🔥 सबसे जरूरी बदलाव: यहाँ सॉकेट और हार्टबीट चालू करें ताकि बिना लॉगिन पेज पर गए भी यूजर ऑनलाइन दिखे!
-      const productId = "Finance_Tracker";
 
       if (!socketRef.current) {
         console.log("👉 4. सॉकेट कनेक्ट करने की कोशिश की जा रही है...");
         socketRef.current = io(API_BASE_URL, { // (या आपका जो भी API_BASE_URL हो)
-          query: { token: token, productId: productId }
+          query: { token: token, productId: "Finance_Tracker" }
         });
 
         socketRef.current.on('connect', () => {
@@ -116,12 +116,6 @@ function App() {
             socketRef.current.emit('client_heartbeat');
           }
         }, 60000);
-
-        // क्लीनअप जब ऐप बंद हो
-        return () => {
-          clearInterval(heartbeatInterval);
-          if (socketRef.current) socketRef.current.disconnect();
-        };
       }
 
       //  loadTableData(); // 👈 यहाँ डेटा लोड फंक्शन चालू कर दिया
