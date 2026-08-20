@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { io } from 'socket.io-client';
-import { API_BASE_URL} from '../api';
+import { API_BASE_URL} from './api';
 import { fetchUserProfile } from './pages/profileApi';
 import FinanceLogin from './pages/Login';
 import { LayoutDashboard, CreditCard, Receipt, BarChart3, Settings, Plus, Bell, User, Menu, X, ArrowLeftRight, Wallet, Target, TrendingUp, FileText, Clock } from 'lucide-react';
