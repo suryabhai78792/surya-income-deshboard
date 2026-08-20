@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { io } from 'socket.io-client';
-import { API_BASE_URL} from './api';
+import { API_BASE_URL } from './api';
 import { fetchUserProfile } from './pages/profileApi';
 import FinanceLogin from './pages/Login';
 import { LayoutDashboard, CreditCard, Receipt, BarChart3, Settings, Plus, Bell, User, Menu, X, ArrowLeftRight, Wallet, Target, TrendingUp, FileText, Clock } from 'lucide-react';
@@ -55,14 +55,21 @@ function App() {
   const SAVE_DATA_URL = 'https://my-income-backend.onrender.com/save'
 
   // यह पूरे ऐप के लिए डेटा लोड करके रख लेगा
-  useQuery({
+  //useQuery({
+  //queryKey: ['userProfile'],
+  //queryFn: fetchUserProfile, // अब यहाँ कोड बहुत साफ दिख रहा है!
+  //enabled: isAuth && !!localStorage.getItem('token'),
+  //staleTime: Infinity, // यह सुनिश्चित करता है कि दोबारा API कॉल न हो
+  //});
+
+  // App.jsx के अंदर
+  const { data: userProfile, isLoading: isProfileLoading, error } = useQuery({
     queryKey: ['userProfile'],
-    queryFn: fetchUserProfile, // अब यहाँ कोड बहुत साफ दिख रहा है!
-    enabled: isAuth && !!localStorage.getItem('token'),
-    staleTime: Infinity, // यह सुनिश्चित करता है कि दोबारा API कॉल न हो
+    queryFn: fetchUserProfile,
+    enabled: isAuth,
+    retry: false, // 👈 यह बहुत जरूरी है, वरना यह बार-बार ट्राई करके लोडर को चालू रखेगा
   });
-
-
+  
   // API: Load Table Data
   const loadTableData = () => {
     setIsLoading(true); // डेटा आते ही लोडिंग बंद करें
@@ -127,6 +134,7 @@ function App() {
     } else {
       setIsAuth(false);
     }
+    console.log("App Component Loaded");
     setIsLoading(false); // चेकिंग खत्म, लोडिंग बंद
   }, []);
 
