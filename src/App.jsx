@@ -105,7 +105,7 @@ function App() {
       const productId = "Finance_Tracker";
 
       if (!socketRef.current) {
-        socketRef.current = io('API_BASE_URL', { // (या आपका जो भी API_BASE_URL हो)
+        socketRef.current = io(API_BASE_URL, { // (या आपका जो भी API_BASE_URL हो)
           query: { token: token, productId: productId }
         });
 
