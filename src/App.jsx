@@ -91,29 +91,37 @@ function App() {
       setIsAuth(true);
 
       // 🚀 🔥 सबसे जरूरी बदलाव: यहाँ सॉकेट और हार्टबीट चालू करें ताकि बिना लॉगिन पेज पर गए भी यूजर ऑनलाइन दिखे!
-
-      if (!socketRef.current) {
-        console.log("👉 4. सॉकेट कनेक्ट करने की कोशिश की जा रही है...");
-        socketRef.current = io(API_BASE_URL, { // (या आपका जो भी API_BASE_URL हो)
-          query: { token: token, productId: "Finance_Tracker" }
-        });
-
-        socketRef.current.on('connect', () => {
-          console.log("🟢 5. सॉकेट सफलतापूर्वक कनेक्ट हो गया है! ID:", socketRef.current.id);
-        });
-
-        // हर 60 सेकंड पर सुपर एडमिन को हार्टबीट भेजें
-        const heartbeatInterval = setInterval(() => {
-          if (socketRef.current && socketRef.current.connected) {
-            socketRef.current.emit('client_heartbeat');
-            // 🟢 क्रोम कंसोल इसे खुद-ब-खुद गिन लेगा (साइड में नंबर आ जाएगा)
-            console.log("📡 क्लाइंट हार्टबीट सिग्नल भेजा गया");
-          } else {
-            console.log("⚠️ सॉकेट कनेक्ट नहीं है, हार्टबीट नहीं भेजा गया");
-          }
-
-        }, 60000);
+      // 3. सॉकेट कनेक्शन (पुराना कनेक्शन हो तो पहले बंद करें)
+      if (socketRef.current) {
+        socketRef.current.disconnect();
       }
+
+
+      console.log("👉 4. सॉकेट कनेक्ट करने की कोशिश की जा रही है...");
+      socketRef.current = io(API_BASE_URL, { // (या आपका जो भी API_BASE_URL हो)
+        query: { token: token, productId: "Finance_Tracker" }
+      });
+
+      socketRef.current.on('connect', () => {
+        console.log("🟢 5. सॉकेट सफलतापूर्वक कनेक्ट हो गया है! ID:", socketRef.current.id);
+      });
+
+      // हर 60 सेकंड पर सुपर एडमिन को हार्टबीट भेजें
+      const heartbeatInterval = setInterval(() => {
+        if (socketRef.current && socketRef.current.connected) {
+          socketRef.current.emit('client_heartbeat');
+          // 🟢 क्रोम कंसोल इसे खुद-ब-खुद गिन लेगा (साइड में नंबर आ जाएगा)
+          console.log("📡 क्लाइंट हार्टबीट सिग्नल भेजा गया");
+        } else {
+          console.log("⚠️ सॉकेट कनेक्ट नहीं है, हार्टबीट नहीं भेजा गया");
+        }
+
+      }, 60000);
+
+      // क्लीनअप फंक्शन ताकि 타이मर और सॉकेट ओवरलैप न हों
+      return () => {
+        clearInterval(heartbeatInterval);
+      };
 
       //  loadTableData(); // 👈 यहाँ डेटा लोड फंक्शन चालू कर दिया
     } else {
@@ -122,7 +130,7 @@ function App() {
     }
     console.log("👉 6. useEffect का आखिरी हिस्सा आ गया, setIsLoading(false) होने वाला है");
     setIsLoading(false); // चेकिंग खत्म, लोडिंग बंद
-  }, []);
+  }, [isAuth]);
 
   // API: Load Table Data
   const loadTableData = () => {
