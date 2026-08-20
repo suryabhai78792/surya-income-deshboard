@@ -27,7 +27,10 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
 function App() {
 
   // स्टेट्स (States)
+  const [token, setToken] = useState(localStorage.getItem('token') || '');
+  const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
   const [isAuth, setIsAuth] = useState(false); // 👈 यह बताएगा कि यूजर सही है या नहीं
+
   const deviceView = useDeviceView();
   const [databaseData, setDatabaseData] = useState({});
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -36,19 +39,11 @@ function App() {
   const [selectedYear, setSelectedYear] = useState('2025')
   const [selectedMonth, setSelectedMonth] = useState('Jan')
 
-
   const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' या 'transactions' loanManager
-
   const [viewMode, setViewMode] = useState('yearly'); // 'daily', 'yearly', 'final'
-
-  const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-
-
-
   const modalContainerRef = useRef(null)
-
 
   // API URLs
   const GET_DATA_URL = 'https://my-income-backend.onrender.com/getdata'
@@ -61,8 +56,6 @@ function App() {
     enabled: isAuth && !!localStorage.getItem('token'),
     staleTime: Infinity, // यह सुनिश्चित करता है कि दोबारा API कॉल न हो
   });
-
-
 
   // 🟢 सॉकेट और हार्टबीट को मैनेज करने के लिए रेफ (Ref) ताकि कनेक्शन बार-बार डुप्लीकेट न हो
   const socketRef = useRef(null);
@@ -125,7 +118,7 @@ function App() {
     }
     console.log("👉 6. useEffect का आखिरी हिस्सा आ गया, setIsLoading(false) होने वाला है");
     setIsLoading(false); // चेकिंग खत्म, लोडिंग बंद
-  }, [isAuth]);
+  }, [token]);
 
   // API: Load Table Data
   const loadTableData = () => {
