@@ -55,20 +55,12 @@ function App() {
   const SAVE_DATA_URL = 'https://my-income-backend.onrender.com/save'
 
   // यह पूरे ऐप के लिए डेटा लोड करके रख लेगा
-  //useQuery({
-  //queryKey: ['userProfile'],
-  //queryFn: fetchUserProfile, // अब यहाँ कोड बहुत साफ दिख रहा है!
-  //enabled: isAuth && !!localStorage.getItem('token'),
-  //staleTime: Infinity, // यह सुनिश्चित करता है कि दोबारा API कॉल न हो
-  //});
-
-  // App.jsx के अंदर
-  const { data: userProfile, isLoading: isProfileLoading, error } = useQuery({
-    queryKey: ['userProfile'],
-    queryFn: fetchUserProfile,
-    enabled: isAuth,
-    retry: false, // 👈 यह बहुत जरूरी है, वरना यह बार-बार ट्राई करके लोडर को चालू रखेगा
-  });
+   useQuery({
+     queryKey: ['userProfile'],
+     queryFn: fetchUserProfile, // अब यहाँ कोड बहुत साफ दिख रहा है!
+     enabled: isAuth && !!localStorage.getItem('token'),
+     staleTime: Infinity, // यह सुनिश्चित करता है कि दोबारा API कॉल न हो
+   });
 
 
 
