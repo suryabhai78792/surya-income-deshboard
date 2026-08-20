@@ -27,10 +27,8 @@ const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Se
 function App() {
 
   // स्टेट्स (States)
-  const [token, setToken] = useState(localStorage.getItem('token') || '');
-  const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
   const [isAuth, setIsAuth] = useState(false); // 👈 यह बताएगा कि यूजर सही है या नहीं
-
+  const [isLoading, setIsLoading] = useState(true); // शुरू में लोडिंग दिखाएं
   const deviceView = useDeviceView();
   const [databaseData, setDatabaseData] = useState({});
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -40,7 +38,9 @@ function App() {
   const [selectedMonth, setSelectedMonth] = useState('Jan')
 
   const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' या 'transactions' loanManager
+
   const [viewMode, setViewMode] = useState('yearly'); // 'daily', 'yearly', 'final'
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const modalContainerRef = useRef(null)
@@ -89,7 +89,6 @@ function App() {
         socketRef.current.disconnect();
       }
 
-
       console.log("👉 4. सॉकेट कनेक्ट करने की कोशिश की जा रही है...");
       socketRef.current = io(API_BASE_URL, { // (या आपका जो भी API_BASE_URL हो)
         query: { token: token, productId: "Finance_Tracker" }
@@ -118,7 +117,7 @@ function App() {
     }
     console.log("👉 6. useEffect का आखिरी हिस्सा आ गया, setIsLoading(false) होने वाला है");
     setIsLoading(false); // चेकिंग खत्म, लोडिंग बंद
-  }, [token]);
+  }, []);
 
   // API: Load Table Data
   const loadTableData = () => {

@@ -45,6 +45,7 @@ export default function FinanceLogin({ onLoginSuccess }) {
         // App.jsx को बताना कि लॉगिन सफल हो गया है
         if (onLoginSuccess) {
           onLoginSuccess(); // यह App.jsx वाले फंक्शन को ट्रिगर कर देता है
+          window.location.reload();
         }
 
         // 4. यहाँ डैशबोर्ड पर रीडायरेक्ट कर दें
