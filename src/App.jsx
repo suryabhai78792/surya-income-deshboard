@@ -82,7 +82,7 @@ function App() {
       });
 
       socketRef.current.on('connect', () => {
-        console.log("🟢 4. सॉकेट सफलतापूर्वक कनेक्ट हो गया है! ID:", socketRef.current.id);
+        console.log("👉 4. 🟢सॉकेट सफलतापूर्वक कनेक्ट हो गया है! ID:", socketRef.current.id);
       });
 
       // हर 60 सेकंड पर सुपर एडमिन को हार्टबीट भेजें
@@ -99,10 +99,10 @@ function App() {
 
       //  loadTableData(); // 👈 यहाँ डेटा लोड फंक्शन चालू कर दिया
     } else {
-      console.log("🔴 2. लोकल स्टोरेज में कोई टोकन नहीं मिला, यूजर लॉग इन नहीं है");
+      console.log("👉 2. 🔴 लोकल स्टोरेज में कोई टोकन नहीं मिला, यूजर लॉग इन नहीं है");
       setIsAuth(false);
     }
-    console.log("👉 5. useEffect का आखिरी हिस्सा आ गया, setIsLoading(false) होने वाला है");
+    console.log(`👉 ${!token ? '3.' : '5.'} useEffect का आखिरी हिस्सा आ गया, setIsLoading(false) होने वाला है`);
     setIsLoading(false); // चेकिंग खत्म, लोडिंग बंद
   }, []);
 
