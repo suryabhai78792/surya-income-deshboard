@@ -69,51 +69,45 @@ function App() {
     enabled: isAuth,
     retry: false, // 👈 यह बहुत जरूरी है, वरना यह बार-बार ट्राई करके लोडर को चालू रखेगा
   });
-  
-  // API: Load Table Data
-  const loadTableData = () => {
-    setIsLoading(true); // डेटा आते ही लोडिंग बंद करें
-    fetch('https://my-income-backend.onrender.com/getdata')
-      .then(res => {
-        if (!res.ok) throw new Error("Network response was not ok");
-        return res.json();
-      })
-      .then(data => {
-        setDatabaseData(data);
-        latestDataRef.current = data; // 🔥 स्टेट के साथ-साथ रीफ़ में भी लेटेस्ट डेटा रख लें       
 
-      })
-      .catch(err => {
-        console.error("लोड एरर:", err)
-      })
-  };
+
 
   // 🟢 सॉकेट और हार्टबीट को मैनेज करने के लिए रेफ (Ref) ताकि कनेक्शन बार-बार डुप्लीकेट न हो
   const socketRef = useRef(null);
 
   useEffect(() => {
+    console.log("👉 1. useEffect शुरू हो गया है");
     // 1. URL से टोकन चेक करें (अगर कभी यूआरएल से पास होकर आए)
     const queryParams = new URLSearchParams(window.location.search);
     const tokenFromUrl = queryParams.get('token');
     const roleFromUrl = queryParams.get('role');
 
     if (tokenFromUrl) {
+      console.log("👉 2. URL से टोकन मिल गया है");
       localStorage.setItem('token', tokenFromUrl);
       localStorage.setItem('role', roleFromUrl || 'client_admin');
       window.history.replaceState({}, document.title, window.location.pathname);
+    } else {
+      console.log("👉 2. URL में कोई टोकन नहीं है, लोकल स्टोरेज चेक हो रहा है");
     }
 
     // 2. लोकल स्टोरेज से टोकन चेक करें
     const token = localStorage.getItem('token');
 
     if (token) {
+      console.log("👉 3. टोकन मिल गया है, setIsAuth(true) कर रहे हैं");
       setIsAuth(true);
       // 🚀 🔥 सबसे जरूरी बदलाव: यहाँ सॉकेट और हार्टबीट चालू करें ताकि बिना लॉगिन पेज पर गए भी यूजर ऑनलाइन दिखे!
       const productId = "Finance_Tracker";
 
       if (!socketRef.current) {
+        console.log("👉 4. सॉकेट कनेक्ट करने की कोशिश की जा रही है...");
         socketRef.current = io(API_BASE_URL, { // (या आपका जो भी API_BASE_URL हो)
           query: { token: token, productId: productId }
+        });
+
+        socketRef.current.on('connect', () => {
+          console.log("🟢 5. सॉकेट सफलतापूर्वक कनेक्ट हो गया है! ID:", socketRef.current.id);
         });
 
         // हर 60 सेकंड पर सुपर एडमिन को हार्टबीट भेजें
@@ -132,13 +126,30 @@ function App() {
 
       //  loadTableData(); // 👈 यहाँ डेटा लोड फंक्शन चालू कर दिया
     } else {
+      console.log("🔴 3. लोकल स्टोरेज में कोई टोकन नहीं मिला, यूजर लॉग इन नहीं है");
       setIsAuth(false);
     }
-    console.log("App Component Loaded");
+    console.log("👉 6. useEffect का आखिरी हिस्सा आ गया, setIsLoading(false) होने वाला है");
     setIsLoading(false); // चेकिंग खत्म, लोडिंग बंद
   }, []);
 
+  // API: Load Table Data
+  const loadTableData = () => {
+    setIsLoading(true); // डेटा आते ही लोडिंग बंद करें
+    fetch('https://my-income-backend.onrender.com/getdata')
+      .then(res => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then(data => {
+        setDatabaseData(data);
+        latestDataRef.current = data; // 🔥 स्टेट के साथ-साथ रीफ़ में भी लेटेस्ट डेटा रख लें       
 
+      })
+      .catch(err => {
+        console.error("लोड एरर:", err)
+      })
+  };
 
   // 5. बैकअप डेटा डाउनलोड लॉजिक
   const handleDownloadBackup = () => {
