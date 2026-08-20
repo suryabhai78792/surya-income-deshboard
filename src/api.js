@@ -1,7 +1,7 @@
 // src/api.js
 
-export const API_BASE_URL = import.meta.env.VITE_API_URL; // आपका रेंडर लाइव लिंक
-
+// यह तरीका रेंडर के वेरिएबल पर निर्भर नहीं रहेगा
+export const API_BASE_URL = import.meta.env.VITE_API_URL || "https://my-income-backend.onrender.com";
 // एक कॉमन फेच फंक्शन ताकि बार-बार कोड न लिखना पड़े
 export async function callApi(endpoint, method = "GET", data = null, token = null) {
     try {
