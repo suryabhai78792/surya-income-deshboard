@@ -61,13 +61,13 @@ function App() {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    console.log("👉 1. useEffect शुरू हो गया है");
+    console.log(`⏱️ [${new Date().toLocaleTimeString()}] 👉 1. useEffect शुरू हो गया है`);
 
     // 2. लोकल स्टोरेज से टोकन चेक करें
     const token = localStorage.getItem('token');
 
     if (token) {
-      console.log("👉 2. टोकन मिल गया है, setIsAuth(true) कर रहे हैं");
+      console.log(`⏱️ [${new Date().toLocaleTimeString()}] 👉 2. टोकन मिल गया है, setIsAuth(true) कर रहे हैं`);
       setIsAuth(true);
 
       // 🚀 🔥 सबसे जरूरी बदलाव: यहाँ सॉकेट और हार्टबीट चालू करें ताकि बिना लॉगिन पेज पर गए भी यूजर ऑनलाइन दिखे!
@@ -76,13 +76,13 @@ function App() {
         socketRef.current.disconnect();
       }
 
-      console.log("👉 3. सॉकेट कनेक्ट करने की कोशिश की जा रही है...");
+      console.log(`⏱️ [${new Date().toLocaleTimeString()}] 👉 3. सॉकेट कनेक्ट करने की कोशिश की जा रही है...`);
       socketRef.current = io(API_BASE_URL, { // (या आपका जो भी API_BASE_URL हो)
         query: { token: token, productId: "Finance_Tracker" }
       });
 
       socketRef.current.on('connect', () => {
-        console.log("👉 4. 🟢सॉकेट सफलतापूर्वक कनेक्ट हो गया है! ID:", socketRef.current.id);
+        console.log(`⏱️ [${new Date().toLocaleTimeString()}] 👉 4. 🟢सॉकेट सफलतापूर्वक कनेक्ट हो गया है! ID:`, socketRef.current.id);
       });
 
       // हर 60 सेकंड पर सुपर एडमिन को हार्टबीट भेजें
@@ -90,19 +90,19 @@ function App() {
         if (socketRef.current && socketRef.current.connected) {
           socketRef.current.emit('client_heartbeat');
           // 🟢 क्रोम कंसोल इसे खुद-ब-खुद गिन लेगा (साइड में नंबर आ जाएगा)
-          console.log("📡 क्लाइंट हार्टबीट सिग्नल भेजा गया");
+          console.log(`⏱️ [${new Date().toLocaleTimeString()}] 📡 क्लाइंट हार्टबीट सिग्नल भेजा गया`);
         } else {
-          console.log("⚠️ सॉकेट कनेक्ट नहीं है, हार्टबीट नहीं भेजा गया");
+          console.log(`⏱️ [${new Date().toLocaleTimeString()}] ⚠️ सॉकेट कनेक्ट नहीं है, हार्टबीट नहीं भेजा गया`);
         }
 
       }, 60000);
 
       //  loadTableData(); // 👈 यहाँ डेटा लोड फंक्शन चालू कर दिया
     } else {
-      console.log("👉 2. 🔴 लोकल स्टोरेज में कोई टोकन नहीं मिला, यूजर लॉग इन नहीं है");
+      console.log(`⏱️ [${new Date().toLocaleTimeString()}] 👉 2. 🔴 लोकल स्टोरेज में कोई टोकन नहीं मिला, यूजर लॉग इन नहीं है`);
       setIsAuth(false);
     }
-    console.log(`👉 ${!token ? '3.' : '5.'} useEffect का आखिरी हिस्सा आ गया, setIsLoading(false) होने वाला है`);
+    console.log(`⏱️ [${new Date().toLocaleTimeString()}] 👉 useEffect का आखिरी हिस्सा आ गया, setIsLoading(false) होने वाला है`);
     setIsLoading(false); // चेकिंग खत्म, लोडिंग बंद
   }, []);
 
