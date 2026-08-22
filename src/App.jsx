@@ -1,4 +1,3 @@
-import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { io } from 'socket.io-client';
 import { API_BASE_URL } from './api';

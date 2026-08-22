@@ -1,8 +1,8 @@
-import React from 'react';
 import { X, Clock, Settings, Database, LogOut, User } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
+import { handleAppLogout } from '../logout';
 
-const ProfileDrawer = ({ isOpen, onClose }) => {
+const ProfileDrawer = ({ isOpen, onClose, socketRef, setIsAuth }) => {
 
     const queryClient = useQueryClient();
 
@@ -82,10 +82,7 @@ const ProfileDrawer = ({ isOpen, onClose }) => {
                 <div className="flex justify-start pt-2">
                     <button
                         type="button"
-                        onClick={() => {
-                            localStorage.clear();
-                            window.location.reload();
-                        }}
+                        onClick={() => handleAppLogout(socketRef, setIsAuth)}
                         className="flex cursor-pointer items-center gap-2 rounded-md border-none bg-red-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-red-600 shadow-sm"
                     >
                         <LogOut size={16} />

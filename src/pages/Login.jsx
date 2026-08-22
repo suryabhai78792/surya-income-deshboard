@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
-import { API_BASE_URL, callApi } from '../api';
+import { useState, useEffect } from 'react';
+import {callApi } from '../api';
 
 export default function FinanceLogin({ onLoginSuccess }) {
   // 1. प्रोडक्ट आईडी फिक्स्ड है

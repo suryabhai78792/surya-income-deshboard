@@ -1,4 +1,3 @@
-import React from 'react';
 import { X, Clock, Settings, Database, LogOut, User } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { handleAppLogout } from '../logout';
