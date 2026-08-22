@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import {callApi } from '../api';
+import { callApi } from '../api';
+import Register from './Register'; // इम्पोर्ट करें
 
 export default function FinanceLogin({ onLoginSuccess }) {
   // 1. प्रोडक्ट आईडी फिक्स्ड है
@@ -40,7 +41,7 @@ export default function FinanceLogin({ onLoginSuccess }) {
         // 1. लोकल स्टोरेज में सेव करें
         localStorage.setItem('token', token);
         localStorage.setItem('role', role || 'client_admin');
-        
+
         // App.jsx को बताना कि लॉगिन सफल हो गया है
         if (onLoginSuccess) {
           onLoginSuccess(); // यह App.jsx वाले फंक्शन को ट्रिगर कर देता है
@@ -58,6 +59,19 @@ export default function FinanceLogin({ onLoginSuccess }) {
     } finally {
       setIsLoading(false);
     }
+  }
+
+
+  const [isRegistering, setIsRegistering] = useState(false); // 👈 यह ट्रैक करेगा कि कौन सा पेज दिखाना है
+
+  // अगर यूजर रजिस्टर करना चाहता है, तो Register कंपोनेंट दिखाएं
+  if (isRegistering) {
+    return (
+      <Register
+        onSwitchToLogin={() => setIsRegistering(false)}
+        onRegisterSuccess={() => setIsRegistering(false)}
+      />
+    );
   }
 
   return (
@@ -93,6 +107,17 @@ export default function FinanceLogin({ onLoginSuccess }) {
             {isLoading ? 'लॉगिन हो रहा है...' : 'Login'}
           </button>
         </form>
+        {/* 👇 रजिस्टर पेज पर जाने के लिए बटन */}
+        <div className="mt-6 text-center border-t pt-4">
+          <p className="text-sm text-gray-600">Don't have an account?</p>
+          <button
+            onClick={() => setIsRegistering(true)}
+            className="mt-2 text-blue-600 font-semibold hover:underline"
+          >
+            Create New Account (Register)
+          </button>
+        </div>
+
       </div>
     </div>
   );
