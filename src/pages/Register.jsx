@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { API_BASE_URL } from '../api'; // अपनी जरूरत के अनुसार पाथ सेट करें
+import { Eye, EyeOff } from 'lucide-react';
 
 function Register({ onSwitchToLogin, onRegisterSuccess }) {
     const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ function Register({ onSwitchToLogin, onRegisterSuccess }) {
         product_id: 'Finance_Tracker' // आपके प्रोजेक्ट के अनुसार
     });
 
+    const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -97,7 +99,23 @@ function Register({ onSwitchToLogin, onRegisterSuccess }) {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Password</label>
-                        <input type="password" name="password" value={formData.password} onChange={handleChange} required className="w-full mt-1 p-2 border rounded-lg" />
+                        <div className="relative flex items-center mt-1 border rounded-lg bg-white overflow-hidden">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                                className="flex-1 p-2 outline-none"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="pr-3 text-gray-500 focus:outline-none"
+                            >
+                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
+                        </div>
                     </div>
 
                     <button type="submit" disabled={loading} className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
