@@ -10,4 +10,5 @@ export const handleAppLogout = (socketRef, setIsAuth) => {
 
   // 3. स्टेट को फॉल्स करें
   setIsAuth(false);
+  window.location.reload();
 };
