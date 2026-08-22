@@ -7,8 +7,5 @@ export const handleAppLogout = (socketRef, setIsAuth) => {
 
   // 2. लोकल स्टोरेज साफ़ करें
   localStorage.clear();
-
-  // 3. स्टेट को फॉल्स करें
-  setIsAuth(false);
   window.location.reload();
 };
