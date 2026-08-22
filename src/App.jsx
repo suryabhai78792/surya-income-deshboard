@@ -65,6 +65,7 @@ function App() {
 
     // 2. लोकल स्टोरेज से टोकन चेक करें
     const token = localStorage.getItem('token');
+    let heartbeatInterval = null; // 👈 वेरिएबल यहाँ डिफाइन करें
 
     if (token) {
       console.log(`⏱️ [${new Date().toLocaleTimeString()}] 👉 2. टोकन मिल गया है, setIsAuth(true) कर रहे हैं`);
@@ -86,7 +87,7 @@ function App() {
       });
 
       // हर 60 सेकंड पर सुपर एडमिन को हार्टबीट भेजें
-      const heartbeatInterval = setInterval(() => {
+      heartbeatInterval = setInterval(() => {
         if (socketRef.current && socketRef.current.connected) {
           socketRef.current.emit('client_heartbeat');
           // 🟢 क्रोम कंसोल इसे खुद-ब-खुद गिन लेगा (साइड में नंबर आ जाएगा)
@@ -104,6 +105,16 @@ function App() {
     }
     console.log(`⏱️ [${new Date().toLocaleTimeString()}] 👉 useEffect का आखिरी हिस्सा आ गया, setIsLoading(false) होने वाला है`);
     setIsLoading(false); // चेकिंग खत्म, लोडिंग बंद
+
+    // 🚀 🟢 सबसे जरूरी: क्लीनअप फंक्शन (Cleanup Function)
+    return () => {
+      if (heartbeatInterval) {
+        clearInterval(heartbeatInterval); // 👈 यहाँ इस वेरिएबल का इस्तेमाल हो गया, जिससे डिम कलर हट जाएगा और फालतू टाइमर बंद हो जाएंगे
+      }
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+      }
+    };
   }, []);
 
   // API: Load Table Data
@@ -254,6 +265,8 @@ function App() {
                 <ProfileModal
                   isOpen={isProfileOpen}
                   onClose={() => setIsProfileOpen(false)}
+                  socketRef={socketRef}   
+                  setIsAuth={setIsAuth}     
                 />
 
               </div>

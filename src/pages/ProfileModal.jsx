@@ -1,8 +1,9 @@
 import React from 'react';
 import { X, Clock, Settings, Database, LogOut, User } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
+import { handleAppLogout } from '../logout';
 
-export default function ProfileModal({ isOpen, onClose }) {
+export default function ProfileModal({ isOpen, onClose, socketRef, setIsAuth }) {
 
   const queryClient = useQueryClient();
 
@@ -76,10 +77,7 @@ export default function ProfileModal({ isOpen, onClose }) {
       <div className="flex justify-end">
         <button
           type="button"
-          onClick={() => {
-            localStorage.clear(); // 👈 टोकन और सारा डेटा साफ़ कर देगा
-            window.location.reload(); // 👈 पेज को रिफ्रेश करके लॉगिन स्क्रीन पर ले जाएगा
-          }}
+          onClick={() => handleAppLogout(socketRef, setIsAuth)}
           className="flex cursor-pointer items-center gap-2 rounded-md border-none bg-red-500 px-3.5 py-2 text-xs font-bold text-white hover:bg-red-600"
         >
           <LogOut size={16} />
