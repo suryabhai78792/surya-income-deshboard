@@ -86,6 +86,8 @@ function App() {
         console.log(`⏱️ [${new Date().toLocaleTimeString()}] 👉 4. 🟢सॉकेट सफलतापूर्वक कनेक्ट हो गया है! ID:`, socketRef.current.id);
       });
 
+
+
       // हर 60 सेकंड पर सुपर एडमिन को हार्टबीट भेजें
       heartbeatInterval = setInterval(() => {
         if (socketRef.current && socketRef.current.connected) {
@@ -106,11 +108,23 @@ function App() {
     console.log(`⏱️ [${new Date().toLocaleTimeString()}] 👉 useEffect का आखिरी हिस्सा आ गया, setIsLoading(false) होने वाला है`);
     setIsLoading(false); // चेकिंग खत्म, लोडिंग बंद
 
+    // 👇 यहाँ यह नया कोड जोड़ें: टैब या ब्राउज़र बंद होने पर तुरंत डिस्कनेक्ट सिग्नल भेजने के लिए
+    const handleBeforeUnload = () => {
+      if (socketRef.current) {
+        socketRef.current.disconnect(); // सर्वर को तुरंत डिस्कनेक्ट का मैसेज चला जाएगा
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+
     // 🚀 🟢 सबसे जरूरी: क्लीनअप फंक्शन (Cleanup Function)
     return () => {
       if (heartbeatInterval) {
         clearInterval(heartbeatInterval); // 👈 यहाँ इस वेरिएबल का इस्तेमाल हो गया, जिससे डिम कलर हट जाएगा और फालतू टाइमर बंद हो जाएंगे
       }
+
+      window.removeEventListener('beforeunload', handleBeforeUnload);
       if (socketRef.current) {
         socketRef.current.disconnect();
       }
@@ -265,8 +279,8 @@ function App() {
                 <ProfileModal
                   isOpen={isProfileOpen}
                   onClose={() => setIsProfileOpen(false)}
-                  socketRef={socketRef}   
-                  setIsAuth={setIsAuth}     
+                  socketRef={socketRef}
+                  setIsAuth={setIsAuth}
                 />
 
               </div>
