@@ -59,10 +59,20 @@ function Register({ onSwitchToLogin, onRegisterSuccess }) {
                 <form onSubmit={handleRegister} className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">User ID</label>
-                        <input type="text" name="user_id" value={formData.user_id} onChange={handleChange} required className="w-full mt-1 p-2 border rounded-lg" />
-                        <span className="absolute right-3 text-gray-400 text-sm pointer-events-none select-none">
-                            @spreeti.com
-                        </span>
+                        <div className="relative flex items-center mt-1">
+                            <input
+                                type="text"
+                                name="user_id"
+                                placeholder="surya"
+                                value={formData.user_id}
+                                onChange={handleChange}
+                                required
+                                className="w-full p-2 pr-28 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                            <span className="absolute right-3 text-gray-400 text-sm pointer-events-none select-none">
+                                @spreeti.com
+                            </span>
+                        </div>
                     </div>
 
                     <div>
