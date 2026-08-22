@@ -63,7 +63,7 @@ function Register({ onSwitchToLogin, onRegisterSuccess }) {
                             <input
                                 type="text"
                                 name="user_id"
-                                placeholder="surya"
+                                placeholder=""
                                 value={formData.user_id}
                                 onChange={handleChange}
                                 required
