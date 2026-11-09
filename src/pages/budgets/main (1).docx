@@ -1,0 +1,104 @@
+import React, { useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import {
+  Landmark, Waves, ArrowDown, ArrowUp, ArrowRight, Wallet, Coins,
+  ShieldCheck, FileText, Plane, House, CircleDollarSign, Utensils,
+  Flower2, CircleUserRound, X
+} from 'lucide-react';
+import './styles.css';
+
+const topCards = [
+  { id: 'feb', bank: 'IPPB Bank', month: 'February 2027', label: 'Cash Received', amount: '₹ 30,000', note: '(100%)', tone: 'blue', direction: 'down', icon: Landmark },
+  { id: 'jan', bank: 'IPPB Bank', month: 'January 2027', label: 'Income Balance', amount: '₹ 25,000', note: '(100%)', tone: 'green', direction: 'up', icon: Landmark },
+  { id: 'dec', bank: 'IPPB Bank', month: 'December 2026', label: 'Income Balance', amount: '₹ 28,000', note: '(100%)', tone: 'blue', direction: 'down', icon: Landmark },
+  { id: 'nov', bank: 'IPPB Bank', month: 'November 2026', label: 'Income Balance', amount: '₹ 29,000', note: '(100%)', tone: 'green', direction: 'up', icon: Landmark },
+];
+
+const accounts = [
+  { id: 'post-office-saving', bank: 'Post office Bank', month: 'October 2026', label: 'Saving (20%)', amount: '₹ 4,500', note: '(4000+500)', tone: 'yellow', icon: Coins },
+  { id: 'sbi-emergency', bank: 'SBI', month: 'October 2026', label: 'Emergency fund (10%)', amount: '₹ 4,000', note: '(3500+500)', tone: 'blue', icon: ShieldCheck },
+  { id: 'central-loan', bank: 'Central Bank', month: 'October 2026', label: 'Loan (20%)', amount: '₹ 29,000', note: '(15000+5000)', tone: 'green', icon: FileText },
+  { id: 'pnb-expense', bank: 'PNB Bank', month: 'October 2026', label: 'Expense (50%)', amount: '₹ 15,000', note: '(10000+5000)', tone: 'blue', icon: Utensils },
+  { id: 'post-office-visiting', bank: 'POST office', month: 'October 2026', label: 'Visiting fund', amount: '₹ 2,500', note: '(2000+500)', tone: 'yellow', icon: Plane },
+  { id: 'boi-home', bank: 'BOI Bank', month: 'October 2026', label: 'Home clothing medicine', amount: '₹ 14,000', note: '(12000+2000)', tone: 'green', icon: House },
+];
+
+function Card({ item, selected, onClick, compact = false }) {
+  const MainIcon = item.icon || Landmark;
+  const FlowIcon = item.direction === 'up' ? ArrowUp : ArrowDown;
+  return (
+    <button
+      type="button"
+      className={`bank-card ${item.tone} ${compact ? 'account-card' : 'summary-card'} ${selected ? 'selected' : ''}`}
+      onClick={() => onClick(item)}
+      aria-pressed={selected}
+      aria-label={`${item.bank || 'Account'} ${item.month}, ${item.label}, ${item.amount}`}
+    >
+      <span className="icon-ring"><MainIcon size={compact ? 30 : 28} strokeWidth={2.2} /></span>
+      <span className="card-main">
+        <span className="card-title-row">
+          <span className="card-bank">{item.bank}</span>
+          {!compact && <Waves className="wave-mark" size={34} strokeWidth={1.8} />}
+        </span>
+        <span className="card-month">{item.month}</span>
+        <span className="card-rule" />
+        <span className="card-label-row">
+          {compact ? <MainIcon className="mini-icon" size={27} strokeWidth={2.2} /> : <FlowIcon className="mini-icon" size={28} strokeWidth={3} />}
+          <span className="card-label">{item.label}</span>
+        </span>
+        <span className="amount-row"><strong>{item.amount}</strong> <span>{item.note}</span></span>
+      </span>
+    </button>
+  );
+}
+
+function App() {
+  const [selected, setSelected] = useState(null);
+  const handleSelect = (item) => setSelected(item);
+  return (
+    <main className="page-shell min-h-screen w-full px-4 py-7 sm:px-6 sm:py-10">
+      <div className="dashboard mx-auto w-full max-w-5xl">
+        <section className="summary-grid" aria-label="Monthly overview">
+          <Card item={topCards[0]} selected={selected?.id === topCards[0].id} onClick={handleSelect} />
+          <Card item={topCards[1]} selected={selected?.id === topCards[1].id} onClick={handleSelect} />
+          <Card item={topCards[2]} selected={selected?.id === topCards[2].id} onClick={handleSelect} />
+          <Card item={topCards[3]} selected={selected?.id === topCards[3].id} onClick={handleSelect} />
+        </section>
+
+        <div className="connector connector-top" aria-hidden="true"><ArrowRight size={22} /></div>
+        <div className="connector connector-middle" aria-hidden="true"><span /><ArrowRight size={22} /></div>
+
+        <section className="balance-panel">
+          <button className={`balance-heading ${selected?.id === 'october-balance' ? 'selected' : ''}`} onClick={() => handleSelect({ id: 'october-balance', bank: 'October 2026 Balance', month: 'October 2026', label: 'Total balance', amount: '₹ 80,000', note: '' })}>
+            <Wallet size={39} strokeWidth={2.2} />
+            <span>October 2026 Balance</span>
+            <strong>₹ 80,000</strong>
+          </button>
+          <div className="account-grid">
+            {accounts.slice(0, 4).map((item) => <Card key={item.id} item={item} compact selected={selected?.id === item.id} onClick={handleSelect} />)}
+          </div>
+        </section>
+
+        <div className="connector connector-bottom" aria-hidden="true"><span /><span /></div>
+        <section className="bottom-grid" aria-label="Other October accounts">
+          {accounts.slice(4).map((item) => <Card key={item.id} item={item} compact selected={selected?.id === item.id} onClick={handleSelect} />)}
+        </section>
+
+        {selected && (
+          <div className="selection-panel" role="status">
+            <div className={`selection-icon ${selected.tone || 'blue'}`}><CircleDollarSign size={22} /></div>
+            <div className="selection-copy">
+              <span className="selection-eyebrow">Selected card</span>
+              <strong>{selected.bank}</strong>
+              <span>{selected.month} · {selected.label} · {selected.amount}</span>
+            </div>
+            <button className="clear-selection" onClick={() => setSelected(null)} aria-label="Clear selection"><X size={19} /></button>
+          </div>
+        )}
+        <p className="page-note">Click any card to select it. This is a visual demo; no banking actions are performed.</p>
+      </div>
+    </main>
+  );
+}
+
+createRoot(document.getElementById('root')).render(<App />);

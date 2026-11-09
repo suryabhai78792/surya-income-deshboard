@@ -18,6 +18,7 @@ import AddTransactionPage from './pages/AddTransactionPage';
 
 
 import TransactionsView from './pages/TransactionsView';
+import BudgetsView from './pages/budgets/BudgetsView';
 import LoanManager from './pages/loanManagers';
 
 const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Total'];
@@ -201,6 +202,7 @@ function App() {
             <main className="pt-4 pb-12 px-0">
               {activeTab === 'dashboard' && <DashboardView data={databaseData} viewMode={viewMode} />}
               {activeTab === 'transactions' && <TransactionsView data={databaseData} />}
+              {activeTab === 'budgets' && <BudgetsView data={databaseData} />}
               {activeTab === 'loanManager' && <LoanManager />}
             </main>
 
@@ -355,7 +357,7 @@ function App() {
 
                   <div
                     className={`cursor-pointer flex items-center gap-3 ${activeTab === 'budgetsGoals' ? 'text-blue-600 font-bold' : 'text-gray-600'}`}
-                    onClick={() => setActiveTab('budgetsGoals')}
+                    onClick={() => setActiveTab('budgets')}
                   >
                     <Target size={20} />
                     Budgets & Goals
@@ -389,6 +391,7 @@ function App() {
                 <div>
                   {activeTab === 'dashboard' && <DashboardView data={databaseData} viewMode={viewMode} />}
                   {activeTab === 'transactions' && <TransactionsView data={databaseData} />}
+                  {activeTab === 'budgets' && <BudgetsView data={databaseData} />}
                   {activeTab === 'loanManager' && <LoanManager />}
                 </div>
 

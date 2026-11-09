@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #f4f8ff; background: #031126; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button { font: inherit; }
+.page-shell { position: relative; overflow: hidden; background: radial-gradient(ellipse at 50% 28%, #082548 0%, #03172f 42%, #020b1a 100%); color: #f4f8ff; }
+.dashboard { position: relative; padding: 2px 0 36px; }
+.summary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 28px; position: relative; z-index: 2; }
+.bank-card { --neon: #04d9ff; --neon-rgb: 4,217,255; display: flex; align-items: flex-start; gap: 16px; position: relative; width: 100%; min-width: 0; text-align: left; color: #f5f8ff; background: linear-gradient(115deg, rgba(2, 24, 49, .97), rgba(3, 16, 36, .98)); border: 2px solid var(--neon); border-radius: 18px; box-shadow: 0 0 7px rgba(var(--neon-rgb), .65), inset 0 0 19px rgba(var(--neon-rgb), .11); padding: 17px 18px 18px; cursor: pointer; transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
+.bank-card.blue { --neon: #04d9ff; --neon-rgb: 4,217,255; }
+.bank-card.green { --neon: #00f59b; --neon-rgb: 0,245,155; background: linear-gradient(115deg, rgba(1, 34, 39, .98), rgba(2, 28, 31, .98)); }
+.bank-card.yellow { --neon: #ffd400; --neon-rgb: 255,212,0; background: linear-gradient(115deg, rgba(39, 31, 2, .98), rgba(26, 23, 3, .98)); }
+.bank-card:hover { transform: translateY(-2px); box-shadow: 0 0 13px rgba(var(--neon-rgb), .78), inset 0 0 22px rgba(var(--neon-rgb), .16); }
+.bank-card:focus-visible, .balance-heading:focus-visible, .clear-selection:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.bank-card.selected { box-shadow: 0 0 0 3px rgba(255,255,255,.85), 0 0 22px rgba(var(--neon-rgb), .9), inset 0 0 22px rgba(var(--neon-rgb), .22); }
+.summary-card { min-height: 157px; }
+.icon-ring { flex: 0 0 58px; width: 58px; height: 58px; border: 2px solid var(--neon); border-radius: 50%; display: grid; place-items: center; color: #f7fbff; box-shadow: 0 0 10px rgba(var(--neon-rgb), .35), inset 0 0 10px rgba(var(--neon-rgb), .1); }
+.card-main { min-width: 0; flex: 1; display: flex; flex-direction: column; }
+.card-title-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.card-bank { font-weight: 600; font-size: clamp(13px, 1.7vw, 19px); line-height: 1.2; letter-spacing: -.35px; }
+.wave-mark { color: #e7f5ff; flex-shrink: 0; }
+.card-month { display: block; margin-top: 0px; font-size: clamp(20px, 2vw, 28px); font-weight: 600; color: #edf5ff; }
+.card-rule { height: 1px; background: rgba(var(--neon-rgb), .65); margin: 9px 0 10px; }
+.card-label-row { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.mini-icon { flex-shrink: 0; color: var(--neon); }
+.card-label { font-size: clamp(24px, 2vw, 32px); font-weight: 700; line-height: 1.25; }
+.amount-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 7px; margin-top: 3px; padding-left: 0; }
+.amount-row strong { font-size: clamp(19px, 2.25vw, 27px); line-height: 1.2; font-weight: 500; letter-spacing: .1px; white-space: nowrap; }
+.amount-row span { font-size: clamp(12px, 1.45vw, 17px); color: #e8f2ff; white-space: nowrap; }
+.connector { height: 32px; color: #e8f7ff; position: relative; z-index: 1; pointer-events: none; }
+.connector-top { position: absolute; top: 153px; left: calc(50% - 13px); display: flex; align-items: center; }
+.connector-middle { height: 43px; margin: -1px 25% 0 25%; border-right: 3px solid #04d9ff; border-bottom: 3px solid #04d9ff; border-left: 3px solid #04d9ff; display: flex; align-items: flex-end; justify-content: space-between; color: #04d9ff; filter: drop-shadow(0 0 3px rgba(4,217,255,.55)); }
+.connector-middle span:first-child { width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #04d9ff; margin-left: -7px; margin-bottom: -5px; }
+.connector-middle svg { margin-right: calc(50% - 10px); margin-bottom: -12px; background: #03172f; }
+.balance-panel { position: relative; z-index: 2; border: 2px solid #04d9ff; border-radius: 23px; padding: 12px 16px 16px; background: rgba(1, 16, 35, .75); box-shadow: 0 0 9px rgba(4,217,255,.38), inset 0 0 20px rgba(4,217,255,.07); }
+.balance-heading { display: flex; align-items: center; gap: 14px; width: 100%; padding: 0 8px 13px; border: 0; background: transparent; color: #f5f8ff; text-align: left; cursor: pointer; border-radius: 9px; }
+.balance-heading svg { color: #00f59b; filter: drop-shadow(0 0 5px rgba(0,245,155,.55)); }
+.balance-heading span { font-size: clamp(17px, 2vw, 24px); font-weight: 800; }
+.balance-heading strong { font-size: clamp(19px, 2.2vw, 27px); font-weight: 400; white-space: nowrap; }
+.balance-heading.selected { background: rgba(4,217,255,.12); }
+.account-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+.account-card { min-height: 151px; padding: 14px 13px; gap: 12px; border-radius: 17px; }
+.account-card .icon-ring { flex-basis: 55px; width: 55px; height: 55px; }
+.account-card .card-bank { font-size: clamp(13px, 1.7vw, 19px); }
+.account-card .card-month { font-size: clamp(20px, 2vw, 28px); }
+.account-card .card-rule { margin: 8px 0 9px; }
+.account-card .card-label-row { gap: 9px; }
+.account-card .card-label { font-size: clamp(24px, 2vw, 32px); }
+.account-card .amount-row strong { font-size: clamp(19px, 2vw, 25px); }
+.account-card .amount-row span { font-size: clamp(11px, 1.25vw, 16px); }
+.account-card .mini-icon { color: var(--neon); }
+.connector-bottom { height: 26px; margin: 0 25%; border-right: 3px solid #04d9ff; border-bottom: 3px solid #04d9ff; border-left: 3px solid #04d9ff; }
+.connector-bottom span:first-child, .connector-bottom span:last-child { position: absolute; bottom: -8px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 9px solid #04d9ff; }
+.connector-bottom span:first-child { left: -7px; }
+.connector-bottom span:last-child { right: -7px; }
+.bottom-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.bottom-grid .account-card { min-height: 145px; }
+.selection-panel { display: flex; align-items: center; gap: 12px; margin-top: 24px; padding: 14px 16px; border: 1px solid rgba(4,217,255,.5); border-radius: 14px; background: rgba(3, 27, 52, .92); box-shadow: 0 0 14px rgba(4,217,255,.12); }
+.selection-icon { width: 40px; height: 40px; flex: 0 0 40px; display: grid; place-items: center; color: #04d9ff; border: 1px solid currentColor; border-radius: 50%; }
+.selection-icon.green { color: #00f59b; }
+.selection-icon.yellow { color: #ffd400; }
+.selection-copy { min-width: 0; display: flex; flex-direction: column; gap: 3px; flex: 1; }
+.selection-eyebrow { font-size: 11px; text-transform: uppercase; letter-spacing: 1.4px; color: #89a8c8; }
+.selection-copy > span:last-child { color: #c5d9ed; font-size: 13px; }
+.clear-selection { display: grid; place-items: center; color: #dcecff; border: 1px solid rgba(220,236,255,.25); border-radius: 8px; width: 34px; height: 34px; background: transparent; cursor: pointer; }
+.page-note { text-align: center; font-size: 12px; color: #7e9bb8; margin: 22px 0 0; }
+@media (min-width: 1100px) { .summary-card { min-height: 174px; padding: 18px 20px; } .account-card { min-height: 166px; padding: 15px 16px; } }
+@media (max-width: 640px) {
+  .page-shell { padding: 20px 12px 30px; }
+  .summary-grid { gap: 13px 11px; }
+  .bank-card { gap: 8px; padding: 12px 10px; border-radius: 13px; }
+  .summary-card { min-height: 147px; }
+  .icon-ring { flex-basis: 37px; width: 37px; height: 37px; }
+  .icon-ring svg { width: 22px; height: 22px; }
+  .card-bank { font-size: 12px; }
+  .wave-mark { width: 23px; height: 23px; }
+  .card-month { font-size: 16px; }
+  .card-rule { margin: 7px 0; }
+  .card-label-row { gap: 5px; }
+  .card-label { font-size: 20px; }
+  .mini-icon { width: 20px; height: 20px; }
+  .amount-row { gap: 4px; }
+  .amount-row strong { font-size: 17px; }
+  .amount-row span { font-size: 10px; }
+  .connector-top { top: 67px; }
+  .connector-middle { margin-left: 22%; margin-right: 22%; height: 27px; }
+  .balance-panel { padding: 11px 9px 10px; border-radius: 17px; }
+  .balance-heading { gap: 8px; padding: 0 3px 11px; }
+  .balance-heading svg { width: 29px; height: 29px; }
+  .balance-heading span { font-size: 14px; }
+  .balance-heading strong { font-size: 16px; }
+  .account-grid { gap: 9px; }
+  .account-card { min-height: 143px; padding: 10px 8px; gap: 7px; border-radius: 13px; }
+  .account-card .icon-ring { flex-basis: 37px; width: 37px; height: 37px; }
+  .account-card .icon-ring svg { width: 21px; height: 21px; }
+  .account-card .card-bank { font-size: 13px; }
+  .account-card .card-month { font-size: 11px; }
+  .account-card .card-label { font-size: 11px; }
+  .account-card .mini-icon { width: 19px; height: 19px; }
+  .account-card .amount-row strong { font-size: 16px; }
+  .account-card .amount-row span { font-size: 9px; }
+  .connector-bottom { margin-left: 22%; margin-right: 22%; height: 20px; }
+  .bottom-grid { gap: 10px; }
+  .bottom-grid .account-card { min-height: 143px; }
+}
+@media (max-width: 370px) {
+  .summary-grid { grid-template-columns: 1fr; }
+  .summary-card { min-height: auto; }               
+  .summary-card .card-bank { font-size: 17px; }
+  .summary-card .card-month { font-size: 14px; }
+  .summary-card .card-label { font-size: 14px; }
+  .summary-card .amount-row strong { font-size: 20px; }
+  .summary-card .amount-row span { font-size: 12px; }
+  .connector-top, .connector-middle, .connector-bottom { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
