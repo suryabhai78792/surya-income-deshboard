@@ -87,7 +87,7 @@ button { font: inherit; }
   .amount-row span { font-size: 10px; }
   .connector-top { top: 67px; }
   .connector-middle { margin-left: 22%; margin-right: 22%; height: 27px; }
-  .balance-panel { padding: 11px 9px 10px; border-radius: 17px; }
+  .balance-panel { height: auto; padding: 11px 9px 10px; border-radius: 17px; }
   .balance-heading { gap: 8px; padding: 0 3px 11px; }
   .balance-heading svg { width: 29px; height: 29px; }
   .balance-heading span { font-size: 14px; }
