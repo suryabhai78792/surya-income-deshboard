@@ -80,7 +80,7 @@ button { font: inherit; }
   .card-month { font-size: 16px; }
   .card-rule { margin: 7px 0; }
   .card-label-row { gap: 5px; }
-  .card-label { font-size: 20px; }
+  .card-label { font-size: 16px; }
   .mini-icon { width: 20px; height: 20px; }
   .amount-row { gap: 4px; }
   .amount-row strong { font-size: 17px; }
