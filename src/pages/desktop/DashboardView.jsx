@@ -1,13 +1,13 @@
 import React from 'react';
 import Chart from 'chart.js/auto' // Chart.js को इम्पोर्ट किया
 import './DashboardView.css'
-import DateTime from '../components/DateTime';
-import StatsCard from '../components/StatsCard';
-import ProfileDrawer from './ProfileDrawer'; // या सही पाथ दें
-import { useDeviceView } from '../components/useDeviceView';
-import { convertDataByMode } from '../components/dataConverter';
-import PieChartCard from '../components/PieChartCard';
-import ReusableTable from '../components/ReusableTable';
+import DateTime from '../../components/DateTime';
+import StatsCard from '../../components/StatsCard';
+import ProfileDrawer from '../ProfileDrawer'; // या सही पाथ दें
+import { useDeviceView } from '../../components/useDeviceView';
+import { convertDataByMode } from '../../components/dataConverter';
+import PieChartCard from '../../components/PieChartCard';
+import ReusableTable from '../../components/ReusableTable';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, LabelList } from 'recharts';
 import { Bell, User } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react'

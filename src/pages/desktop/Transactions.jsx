@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TransactionsView = ({ data }) => {
+const Transactions = ({ data }) => {
 
   // अपना सॉर्टिंग लॉजिक यहाँ लिखें या Props के जरिए पास करें
   // यह डेटा को सही क्रम में लगाएगा
@@ -54,4 +54,4 @@ const processedData = React.useMemo(() => {
     
   );
 };
-export default TransactionsView;
+export default Transactions;

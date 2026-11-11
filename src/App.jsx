@@ -12,14 +12,18 @@ import { useDeviceView } from './components/useDeviceView';
 import { convertDataByMode } from './components/dataConverter';
 import MobileNavbar from './components/MobileNavbar';
 import MyButton from './components/MyButton';
-import DashboardView from './pages/DashboardView';
+
 import ProfileModal from './pages/ProfileModal'; // अपनी फाइल का सही पाथ दें
-import AddTransactionPage from './pages/AddTransactionPage';
+
+import Dashboard from './pages/desktop/Dashboard';
+import Transactions from './pages/desktop/Transactions';
+import AddTransactionPage from './pages/desktop/AddTransactionPage';
 
 
-import TransactionsView from './pages/TransactionsView';
-import BudgetsView from './pages/budgets/BudgetsView';
-import LoanManager from './pages/loanManagers';
+import Home from './pages/mobile/Home/Home';
+import Budgets from './pages/mobile/budgets/Budgets';
+import Loans from './pages/mobile/Loans';
+import History from './pages/mobile/History';
 
 const MONTHS_LIST = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Total'];
 
@@ -37,8 +41,7 @@ function App() {
   const [selectedYear, setSelectedYear] = useState('2025')
   const [selectedMonth, setSelectedMonth] = useState('Jan')
 
-  const [activeTab, setActiveTab] = useState('dashboard'); // 'dashboard' या 'transactions' loanManager
-
+  const [activeTab, setActiveTab] = useState(() => (deviceView === 'mobile' ? 'Home' : 'dashboard'));
   const [viewMode, setViewMode] = useState('yearly'); // 'daily', 'yearly', 'final'
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -48,6 +51,12 @@ function App() {
   // API URLs
   const GET_DATA_URL = 'https://my-income-backend.onrender.com/getdata'
   const SAVE_DATA_URL = 'https://my-income-backend.onrender.com/save'
+
+  // कंसोल में चेक करने के लिए कि मोबाइल व्यू आया है या डेस्कटॉप व्यू (F12 दबाकर Console में देखें)
+  useEffect(() => {
+    console.log('Device View:', deviceView);
+  }, [deviceView]);
+
 
   // यह पूरे ऐप के लिए डेटा लोड करके रख लेगा
   useQuery({
@@ -191,19 +200,16 @@ function App() {
         {/*=========================================================================================================*/}
         {/* 1. मोबाइल पोर्ट्रेट व्यू के लिए लेआउट */}
         {/*=========================================================================================================*/}
-        {deviceView === 'mobile-portrait' && (
-
+        {deviceView === 'mobile' && (
           <>
-
-            {/* 1. हेडर (फिक्स्ड रहेगा) */}
-
-
             {/* मोबाइल पोर्ट्रेट का मुख्य कंटेंट यहाँ दिखेगा */}
             <main className="pt-4 pb-12 px-0">
-              {activeTab === 'dashboard' && <DashboardView data={databaseData} viewMode={viewMode} />}
-              {activeTab === 'transactions' && <TransactionsView data={databaseData} />}
-              {activeTab === 'budgets' && <BudgetsView data={databaseData} />}
-              {activeTab === 'loanManager' && <LoanManager />}
+              {activeTab === 'Home' && <Home data={databaseData} viewMode={viewMode} />}
+              {activeTab === 'IncomeExp' && <IncomeExp data={databaseData} />}
+              {activeTab === 'Budgets' && <Budgets data={databaseData} />}
+              {activeTab === 'Loans' && <Loans data={databaseData} />}
+              {activeTab === 'Reports' && <Reports data={databaseData} />}
+              {activeTab === 'History' && <History data={databaseData} />}
             </main>
 
             {/* 🔥 यहाँ हमने नीचे फिक्स नेविगेशन बार को इम्पोर्ट करके लगा दिया है */}
@@ -214,34 +220,9 @@ function App() {
         )}
 
 
-        {/*=========================================================================================================*/}
-        {/* 2. मोबाइल लैंडस्केप व्यू के लिए लेआउट */}
-        {/*=========================================================================================================*/}
-        {deviceView === 'mobile-landscape' && (
-          <div className="h-full p-4 bg-blue-50 overflow-y-auto">
-            <h2 className="text-lg font-bold text-blue-600">मोबाइल लैंडस्केप लेआउट</h2>
-            {/* यहाँ मोबाइल लैंडस्केप के लिए अलग कोडिंग/क्लास लिखें */}
-          </div>
-        )}
-
 
         {/*=========================================================================================================*/}
-        {/* 3. टैबलेट व्यू (या डेस्कटॉप साइट ऑन + पोर्ट्रेट) के लिए लेआउट */}
-        {/*=========================================================================================================*/}
-        {deviceView === 'tablet' && (
-          <div className="h-full p-6 bg-yellow-50 overflow-y-auto">
-            <h2 className="text-xl font-bold text-yellow-600">टैबलेट व्यू लेआउट</h2>
-            {/* यहाँ टैबलेट के लिए 2-कॉलम वाला लेआउट सेट कर सकते हैं */}
-            <div className="grid grid-cols-2 gap-4">
-              {/* टैबलेट का कंटेंट */}
-            </div>
-          </div>
-        )}
-
-
-
-        {/*=========================================================================================================*/}
-        {/* 4. डेस्कटॉप मोड (या लैपटॉप और मोबाइल में डेस्कटॉप साइट + लैंडस्केप) के लिए लेआउट */}
+        {/* 2. डेस्कटॉप मोड (या लैपटॉप और मोबाइल में डेस्कटॉप साइट + लैंडस्केप) के लिए लेआउट */}
         {/*=========================================================================================================*/}
         {deviceView === 'desktop' && (
 
@@ -258,8 +239,6 @@ function App() {
 
               {/* दाहिना हिस्सा: बेल और यूजर आइकॉन */}
               <div className="flex items-center gap-4">
-
-
 
                 <div className="flex items-center gap-3 bg-white p-4 py-1 rounded-xl border border-gray-200 shadow-sm">
                   <DateTime showIcon="{true}" />
@@ -289,8 +268,6 @@ function App() {
             </header>
 
 
-
-
             {/* 2. मुख्य कंटेनर (साइडबार + कंटेंट) */}
             <div className="flex flex-1 overflow-hidden">
 
@@ -305,9 +282,11 @@ function App() {
 
 
                 <nav className="space-y-4">
-
+                  {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
                   <div
-                    className={`cursor-pointer flex items-center mb-0 gap-3 ${activeTab === 'dashboard' ? 'text-blue-600 font-bold' : 'text-gray-600'}`}
+                    className={`cursor-pointer flex items-center mb-0 gap-3 
+                    ${activeTab === 'dashboard' ? 'text-blue-600 font-bold' : 'text-gray-600'}`}
+
                     onClick={() => setActiveTab('dashboard')}
                   >
                     <LayoutDashboard size={20} /> Dashboard
@@ -339,14 +318,14 @@ function App() {
                       </div>
                     </div>
                   </div>
-
+                  {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
                   <div
                     className={`cursor-pointer flex items-center gap-3 ${activeTab === 'transactions' ? 'text-blue-600 font-bold' : 'text-gray-600'}`}
                     onClick={() => setActiveTab('transactions')}
                   >
                     <Receipt size={20} /> Transactions
                   </div>
-
+                  {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
                   <div
                     className={`cursor-pointer flex items-center gap-3 ${activeTab === 'incomeExpese' ? 'text-blue-600 font-bold' : 'text-gray-600'}`}
                     onClick={() => setActiveTab('incomeExpese')}
@@ -354,7 +333,7 @@ function App() {
                     <Wallet size={20} />
                     Income & Expese
                   </div>
-
+                  {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
                   <div
                     className={`cursor-pointer flex items-center gap-3 ${activeTab === 'budgetsGoals' ? 'text-blue-600 font-bold' : 'text-gray-600'}`}
                     onClick={() => setActiveTab('budgets')}
@@ -362,7 +341,7 @@ function App() {
                     <Target size={20} />
                     Budgets & Goals
                   </div>
-
+                  {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
                   <div
                     className={`cursor-pointer flex items-center gap-3 ${activeTab === 'loanManager' ? 'text-blue-600 font-bold' : 'text-gray-600'}`}
                     onClick={() => setActiveTab('loanManager')}
@@ -370,7 +349,7 @@ function App() {
                     <CreditCard size={20} />
                     Loan Managers
                   </div>
-
+                  {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
                   <div
                     className={`cursor-pointer flex items-center gap-3 ${activeTab === 'Reports' ? 'text-blue-600 font-bold' : 'text-gray-600'}`}
                     onClick={() => setActiveTab('Reports')}
@@ -378,7 +357,7 @@ function App() {
                     <FileText size={20} />
                     Reports
                   </div>
-
+                  {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
                 </nav>
 
               </div>
@@ -389,28 +368,21 @@ function App() {
 
                 {/* 2. दूसरा 'main' हटाकर सीधे DashboardView रखें */}
                 <div>
-                  {activeTab === 'dashboard' && <DashboardView data={databaseData} viewMode={viewMode} />}
-                  {activeTab === 'transactions' && <TransactionsView data={databaseData} />}
-                  {activeTab === 'budgets' && <BudgetsView data={databaseData} />}
+                  {activeTab === 'dashboard' && <Dashboard data={databaseData} viewMode={viewMode} />}
+                  {activeTab === 'transactions' && <Transactions data={databaseData} />}
+                  {activeTab === 'Budgets & Goals' && <BudgetsAndGoals data={databaseData} />}
                   {activeTab === 'loanManager' && <LoanManager />}
                 </div>
 
               </main>
-
-
-
-
 
               {/* Entry Modal */}
               {showModal && (
                 <AddTransactionPage showModal={showModal} setShowModal={setShowModal} />
               )}
 
-
             </div>
           </div>
-
-
 
         )}
         {/*=========================================================================================================*/}

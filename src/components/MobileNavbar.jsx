@@ -7,8 +7,8 @@ export default function MobileNavbar({ activeTab, setActiveTab }) {
 {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}      
       {/* Home Button (डैशबोर्ड की जगह) */}
       <button 
-        onClick={() => setActiveTab('dashboard')} 
-        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'dashboard' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
+        onClick={() => setActiveTab('Home')} 
+        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'Home' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
       >
         <Home size={22} />
         <span className="text-xs mt-1">Home</span>
@@ -16,8 +16,8 @@ export default function MobileNavbar({ activeTab, setActiveTab }) {
 {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
       {/* IncomeExpese Button */}
       <button 
-        onClick={() => setActiveTab('incomeExpese')} 
-        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'incomeExpese' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
+        onClick={() => setActiveTab('IncomeExp')} 
+        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'IncomeExp' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
       >
         <Wallet size={22} />
         <span className="text-xs mt-1">Income/Exp</span>
@@ -25,8 +25,8 @@ export default function MobileNavbar({ activeTab, setActiveTab }) {
 {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
       {/* Budgets Button */}
       <button 
-        onClick={() => setActiveTab('budgets')} 
-        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'budgets' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
+        onClick={() => setActiveTab('Budgets')} 
+        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'Budgets' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
       >
         <Target size={22} />
         <span className="text-xs mt-1">Budgets</span>
@@ -34,8 +34,8 @@ export default function MobileNavbar({ activeTab, setActiveTab }) {
 {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
       {/* Loan Button */}
       <button 
-        onClick={() => setActiveTab('loanManager')} 
-        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'loanManager' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
+        onClick={() => setActiveTab('Loans')} 
+        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'Loans' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
       >
         <CreditCard size={22} />
         <span className="text-xs mt-1">Loans</span>
@@ -43,8 +43,8 @@ export default function MobileNavbar({ activeTab, setActiveTab }) {
 {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
       {/* Reports Button */}
       <button 
-        onClick={() => setActiveTab('reports')} 
-        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'reports' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
+        onClick={() => setActiveTab('Reports')} 
+        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'Reports' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
       >
         <FileText size={22} />
         <span className="text-xs mt-1">Reports</span>
@@ -52,8 +52,8 @@ export default function MobileNavbar({ activeTab, setActiveTab }) {
 {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
       {/* Transactions Button */}
       <button 
-        onClick={() => setActiveTab('transactions')} 
-        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'transactions' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
+        onClick={() => setActiveTab('History')} 
+        className={`flex flex-col items-center justify-center flex-1 py-1 ${activeTab === 'History' ? 'text-blue-600 font-bold' : 'text-gray-500'}`}
       >
         <Clock  size={22} />
         <span className="text-xs mt-1">History</span>

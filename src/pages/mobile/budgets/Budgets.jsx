@@ -5,7 +5,7 @@ import {
   ShieldCheck, FileText, Plane, House, CircleDollarSign, Utensils,
   Flower2, CircleUserRound, X, Settings
 } from 'lucide-react';
-import './BudgetsView.css';
+import './Budgets.css';
 import SettingsPopup from './components/Settings';
 import IppbLogo from './IPPBLogo.png'
 import BOILogo from './BOILogo.png'
