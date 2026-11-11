@@ -6,7 +6,7 @@ const DesktopScaleWrapper = ({ children }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      const baseWidth = 1280; // डेस्कटॉप लेआउट की मूल चौड़ाई
+      const baseWidth = 1440; // डेस्कटॉप लेआउट की मूल चौड़ाई
       const currentWidth = window.innerWidth;
 
       if (currentWidth < baseWidth) {
@@ -27,7 +27,7 @@ const DesktopScaleWrapper = ({ children }) => {
         className="origin-top-left transition-transform duration-100 ease-out"
         style={{
           transform: `scale(${scale})`,
-          width: scale < 1 ? '1280px' : '100%',
+          width: scale < 1 ? '1440px' : '100%',
           height: scale < 1 ? `${100 / scale}%` : 'auto',
         }}
       >
