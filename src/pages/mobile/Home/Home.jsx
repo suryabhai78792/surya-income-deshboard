@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import DateTime from '../../../components/DateTime';
-import StatsCard from '../../../components/StatsCard';
+import StatsCardMobile from '../../../components/StatsCardMobile';
 import ProfileDrawer from '../../ProfileDrawer';
 import PieChartCard from '../../../components/PieChartCard';
 import ReusableTable from '../../../components/ReusableTable';
@@ -69,7 +69,7 @@ const Home = ({ data, viewMode }) => {
         </div>
       </header>
 
-      <StatsCard income={income} expense={expense} budget={budget} savings={savings} loan={loan} />
+      <StatsCardMobile income={income} expense={expense} budget={budget} savings={savings} loan={loan} />
 
       {/* पाई चार्ट स्लाइडर */}
       <div className="flex flex-col gap-2">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import StatsCard from '../../components/StatsCard';
+import StatsCardDesktop from '../../components/StatsCardDesktop';
 import PieChartCard from '../../components/PieChartCard';
 import ReusableTable from '../../components/ReusableTable';
 import LiveChartBox from '../../components/LiveChartBox'; // 👈 यहाँ इम्पोर्ट करें
@@ -32,11 +32,11 @@ const Dashboard = ({ data, viewMode }) => {
   const [savings, setSavings] = useState("95,111");
   const [loan, setloan] = useState("1,40,111");
 
-  
+
   return (
     <div className="p-4 space-y-6">
-      <StatsCard income={income} expense={expense} budget={budget} savings={savings} loan={loan} />
-
+      <StatsCardDesktop income={income} expense={expense} budget={budget} savings={savings} loan={loan} />
+      
       <div className="grid grid-cols-3 gap-6">
         <div className="col-span-2">
           {/* 👈 यहाँ सीधे इस कॉम्पोनेंट को रख दें */}

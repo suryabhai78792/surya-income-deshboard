@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
 
-const StatsCard = ({ income, expense, budget, savings, loan }) => {
+const StatsCardMobile = ({ income, expense, budget, savings, loan }) => {
 
   // इस महीने का लाइव ब्याज (जो प्रति सेकंड 0.025 बढ़ रहा है)
   const [currentMonthInterest, setCurrentMonthInterest] = useState(8623.47);
@@ -108,7 +108,7 @@ const StatsCard = ({ income, expense, budget, savings, loan }) => {
       </div>
 
       {/* 2. डॉट्स (Indicators) वाला हिस्सा - जो मोबाइल पर दिखेगा */}
-      <div className="flex justify-center mb-2 gap-2 md:hidden lg:hidden" >
+      <div className="flex justify-center mb-2 gap-2 md:hidden " >
         {[0, 1, 2, 3].map((index) => (
           <div
             key={index}
@@ -124,4 +124,4 @@ const StatsCard = ({ income, expense, budget, savings, loan }) => {
   );
 };
 
-export default StatsCard;
+export default StatsCardMobile;
