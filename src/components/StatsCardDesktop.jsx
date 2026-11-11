@@ -137,7 +137,7 @@ const StatsCardDesktop = ({ income, expense, budget, savings, loan }) => {
         subTitle="(Savings)"
         value={savings}
         extraInfo={`/₹${income}(कमाई)`}
-        percentage="बजट से अधिक"
+        percentage="+1%"
         isPositive={true}
         bgColor="bg-blue-50"
         borderColor="border-blue-700"
