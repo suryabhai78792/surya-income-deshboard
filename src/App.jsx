@@ -269,10 +269,10 @@ function App() {
 
 
               {/* 2. मुख्य कंटेनर (साइडबार + कंटेंट) */}
-              <div className="flex flex-1  overflow-hidden">
+              <div className="flex flex-1 bg-gray overflow-hidden">
 
                 {/* साइडबार */}
-                <div className="w-64 bg-blue-200 border-r border-gray-300 p-6 flex-shrink-0 h-full">
+                <div className="w-64 bg-white border-r border-gray-300 p-6 flex-shrink-0 h-full">
 
                   {/* ... आपका साइडबार कोड यहाँ रहेगा ... */}
 
@@ -281,7 +281,7 @@ function App() {
                   </button>
 
 
-                  <nav className="space-y-4  ">
+                  <nav className="space-y-4 ">
                     {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
                     <div
                       className={`cursor-pointer flex items-center mb-0 gap-3 
