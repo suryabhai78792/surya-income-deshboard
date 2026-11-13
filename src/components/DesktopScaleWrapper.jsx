@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-// यह कंपोनेंट सिर्फ डेस्कटॉप लेआउट को स्क्रीन के हिसाब से ऑटो-स्केल करेगा
 const DesktopScaleWrapper = ({ children }) => {
   const [scale, setScale] = useState(1);
 
@@ -22,7 +21,7 @@ const DesktopScaleWrapper = ({ children }) => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden bg-gray-50">
+    <div className="w-full min-h-screen overflow-x-hidden flex justify-start">
       <div
         className="origin-top-left transition-transform duration-100 ease-out"
         style={{
