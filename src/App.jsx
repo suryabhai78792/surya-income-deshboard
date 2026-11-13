@@ -227,7 +227,7 @@ function App() {
         {/*=========================================================================================================*/}
         {deviceView === 'desktop' && (
           <DesktopScaleWrapper>
-            <div className="w-full h-screen minh-screen flex flex-col bg-gray-50 overflow-hidden">
+               <div className="minh-screen flex flex-col bg-gray-50">
               {/* आपका डेस्कटॉप वाला लेआउट */}
 
 
@@ -269,7 +269,7 @@ function App() {
 
 
               {/* 2. मुख्य कंटेनर (साइडबार + कंटेंट) */}
-              <div className="flex flex-1 bg-gray overflow-hidden">
+              <div className="flex flex-1 overflow-hidden">
 
                 {/* साइडबार */}
                 <div className="w-64 bg-white border-r border-gray-300 p-6 flex-shrink-0 h-full">
@@ -281,7 +281,7 @@ function App() {
                   </button>
 
 
-                  <nav className="space-y-4 ">
+                  <nav className="space-y-4">
                     {/*--------------------------------------------------------------------------------------------------------------------------------------------------------------*/}
                     <div
                       className={`cursor-pointer flex items-center mb-0 gap-3 
@@ -364,7 +364,7 @@ function App() {
 
 
                 {/* मुख्य कंटेंट क्षेत्र */}
-                <main className="flex-1 overflow-y-auto h-full bg-gray-50">
+                <main className="flex-1 overflow-y-auto p-2 mb-0 ">
 
                   {/* 2. दूसरा 'main' हटाकर सीधे DashboardView रखें */}
                   <div>

@@ -28,8 +28,7 @@ const DesktopScaleWrapper = ({ children }) => {
         style={{
           transform: `scale(${scale})`,
           width: scale < 1 ? '1600px' : '100%',
-          minHeight: '100vh',
-          height: '100%',
+          height: scale < 1 ? `${100 / scale}%` : 'auto',
         }}
       >
         {children}
