@@ -31,7 +31,7 @@ const StatsCardItem = ({
             </p>
             <h2 className="text-2xl font-bold text-gray-900">
               ₹{value}
-              {extraInfo && <span className="text-gray-600 text-sm ml-1">{extraInfo}</span>}
+              {extraInfo && <span className="text-gray-600 text-sm ml-1 whitespace-nowrap">{extraInfo}</span>}
             </h2>
             {children}
           </div>

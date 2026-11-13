@@ -5,9 +5,10 @@ const DesktopScaleWrapper = ({ children }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      const baseWidth = 1440; // डेस्कटॉप लेआउट की मूल चौड़ाई
+      const baseWidth = 1440; // आपके डेस्कटॉप लेआउट की मूल तय चौड़ाई
       const currentWidth = window.innerWidth;
 
+      // अगर स्क्रीन डेस्कटॉप की चौड़ाई से कम है, तो आनुपातिक (proportional) जूम-आउट करें
       if (currentWidth < baseWidth) {
         setScale(currentWidth / baseWidth);
       } else {
@@ -21,7 +22,7 @@ const DesktopScaleWrapper = ({ children }) => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden flex justify-start">
+    <div className="w-full min-h-screen overflow-x-hidden bg-gray-50">
       <div
         className="origin-top-left transition-transform duration-100 ease-out"
         style={{
