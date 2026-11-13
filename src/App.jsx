@@ -227,7 +227,7 @@ function App() {
         {/*=========================================================================================================*/}
         {deviceView === 'desktop' && (
           <DesktopScaleWrapper>
-            <div className="minh-screen flex flex-col bg-gray-50">
+            <div className="h-screen minh-screen flex flex-col bg-gray-50 overflow-hidden">
               {/* आपका डेस्कटॉप वाला लेआउट */}
 
 
