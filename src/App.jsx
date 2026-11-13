@@ -227,7 +227,7 @@ function App() {
         {/*=========================================================================================================*/}
         {deviceView === 'desktop' && (
           <DesktopScaleWrapper>
-            <div className="h-screen minh-screen flex flex-col bg-gray-50 overflow-hidden">
+            <div className="w-full h-screen minh-screen flex flex-col bg-gray-50 overflow-hidden">
               {/* आपका डेस्कटॉप वाला लेआउट */}
 
 
@@ -364,7 +364,7 @@ function App() {
 
 
                 {/* मुख्य कंटेंट क्षेत्र */}
-                <main className="flex-1 overflow-y-auto p-2 mb-0 lg:p-8">
+                <main className="flex-1 overflow-y-auto p-2 mb-0 h-[calc(100vh-73px)] lg:p-8">
 
                   {/* 2. दूसरा 'main' हटाकर सीधे DashboardView रखें */}
                   <div>
