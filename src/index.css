@@ -1,7 +1,4 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 /* पाई चार्ट या किसी भी SVG और उसके पाथ पर क्लिक करने पर आने वाला काला बॉर्डर/रेक्टेंगल पूरी तरह बंद करने के लिए */
 svg, svg *, canvas, path {
   outline: none !important;
@@ -11,23 +8,16 @@ svg, svg *, canvas, path {
   outline: none !important;
 }
 
-/* 🚀 नीचे वाली फालतू पट्टी या स्पेस को पूरी तरह हटाने के लिए यह कोड जोड़ें */
-body, html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
+/* लाइट मोड के लिए (सफेद पट्टी) */
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+  }
 }
 
-/* आपके मुख्य ऐप या सबसे बाहरी कंटेनर के लिए */
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* यह मुख्य क्लास है जो नीचे के खाली स्पेस को खत्म कर देगी */
-.app-container, main {
-  padding-bottom: 0 !important;
-  margin-bottom: 0 !important;
+/* डार्क मोड के लिए (काली पट्टी) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
 }
