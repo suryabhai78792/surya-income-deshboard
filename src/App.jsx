@@ -226,8 +226,8 @@ function App() {
         {/* 2. डेस्कटॉप मोड (या लैपटॉप और मोबाइल में डेस्कटॉप साइट + लैंडस्केप) के लिए लेआउट */}
         {/*=========================================================================================================*/}
         {deviceView === 'desktop' && (
-          <DesktopScaleWrapper>
-               <div className="minh-screen flex flex-col bg-gray-50">
+     
+               <div className="h-screen overflow-hidden minh-screen flex flex-col bg-gray-50">
               {/* आपका डेस्कटॉप वाला लेआउट */}
 
 
@@ -383,7 +383,7 @@ function App() {
 
               </div>
             </div>
-          </DesktopScaleWrapper>
+       
         )}
         {/*=========================================================================================================*/}
 
